@@ -2,6 +2,7 @@ package com.safetynetalert;
 
 
 import com.safetynetalert.repository.FirestationRepository;
+import com.safetynetalert.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,10 +23,12 @@ public class SafetyNetAlertApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		FirestationRepository.initFirestation();
+		PersonRepository.initPersonList();
 		System.out.println(getFirestationByStation(1));
 		System.out.println(getFirestationByStation(2));
 		System.out.println(getFirestationByStation(3));
 		System.out.println("Hello World!");
+		System.out.println();
 
 		};
 	}

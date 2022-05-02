@@ -1,9 +1,12 @@
 package com.safetynetalert.repository;
 
 import com.safetynetalert.model.Firestation;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
+@Repository
 public class FirestationRepository {
     private static ArrayList<Firestation> firestationList = new ArrayList<>();
     public static void initFirestation() {
@@ -16,6 +19,7 @@ public class FirestationRepository {
         firestationList.add(new Firestation("montrouge", 8));
 
     }
+
 
     public static Firestation  getFirestationByStation(int station) {
         for (int i = 0; i < firestationList.size(); i++) {
@@ -30,13 +34,17 @@ public class FirestationRepository {
         return firestation;
     }**/
 
- /*   public Firestation getFirestationByAddress(String address) {
+   public Firestation getFirestationByAddress(String address) {
         for (int i = 0; i < firestationList.size(); i++) {
-            if (firestationList.get(i).getAddress().equals(address)) {
+            if (firestationList.get(i).getAdress().equals(address)) {
                 return firestationList.get(i);
             }
         }
         return null;
-}*/
+}
+
+    public List<Firestation> findAll() {
+        return firestationList;
+    }
 }
 

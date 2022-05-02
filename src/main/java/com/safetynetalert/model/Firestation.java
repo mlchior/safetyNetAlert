@@ -1,7 +1,12 @@
 package com.safetynetalert.model;
 
+import lombok.Data;
 
+import javax.persistence.Entity;
+
+@Data
 public class Firestation {
+
     private String adress;
     private int station;
 
