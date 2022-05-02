@@ -1,7 +1,6 @@
 package com.safetynetalert.service;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.repository.FirestationRepository;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +11,21 @@ public class FirestationService {
     @Autowired
     private FirestationRepository firestationRepository;
 
-    public Firestation getFirestationByStation(int station){
+    public Firestation findFirestationByStation(int station){
         return (firestationRepository.getFirestationByStation(station));
     }
-    public Firestation getFirestationByAdress(String adress){
+    public Firestation findFirestationByAdress(String adress){
         return (firestationRepository.getFirestationByAddress(adress));
     }
 
-    public List<Firestation> getAllFirestation() {
-        return firestationRepository.findAll();
+    public List<Firestation> findAllFirestation() {
+        return firestationRepository.getAllFirestation();
     }
+    //TODO: Add a method to add a new firestation to firestationList
+    public void addFirestation(Firestation firestation) {
+        firestationRepository.save(firestation);
+    }
+
 
 
 

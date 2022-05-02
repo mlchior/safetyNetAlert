@@ -5,7 +5,6 @@ import com.safetynetalert.service.FirestationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,7 +17,7 @@ public class FirestationController {
     //@GetMapping with Firestation int station
    @GetMapping("/firestation/{station}")
     public Firestation getFirestationByStation(@PathVariable int station) {
-        return firestationService.getFirestationByStation(station);
+        return firestationService.findFirestationByStation(station);
     }
     @GetMapping("/firestation")
     public boolean test(){
@@ -28,11 +27,15 @@ public class FirestationController {
     // getAllFirestation method
     @GetMapping("/firestation/all")
     public List<Firestation> getAllFirestation() {
-        return firestationService.getAllFirestation();
+        return firestationService.findAllFirestation();
     }
     @GetMapping("/firestation/adress/{adress}")
     public Firestation getFirestationByAdress(@PathVariable("adress") String adress){
-       return firestationService.getFirestationByAdress(adress);
+       return firestationService.findFirestationByAdress(adress);
     }
-    @
+    @PostMapping("/firestation/add")
+    public void addFirestation(@RequestBody Firestation firestation){
+        firestationService.addFirestation(firestation);
+    }
+
 }

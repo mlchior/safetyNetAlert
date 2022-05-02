@@ -43,8 +43,12 @@ public class FirestationRepository {
         return null;
 }
 
-    public List<Firestation> findAll() {
+    public List<Firestation> getAllFirestation() {
         return firestationList;
+    }
+
+    public void save(Firestation firestation) {
+        firestationList.add(firestation);
     }
 }
 
