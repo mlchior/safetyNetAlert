@@ -24,5 +24,12 @@ public class PersonService {
     public Person findPersonByZip(String zip) {
         return personRepository.getByZip(zip);
     }
+    public Person findPersonByCity(String city){
+        return personRepository.getByCity(city);
     }
+    //TODO Recuperer tous les emails des habitants d'une ville
+    public List<String> findAllEmailsByCity(String city) {
+        return personRepository.getAllEmailsByCity(city);
+    }
+}
 

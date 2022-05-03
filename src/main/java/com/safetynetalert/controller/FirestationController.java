@@ -29,13 +29,12 @@ public class FirestationController {
     public List<Firestation> getAllFirestation() {
         return firestationService.findAllFirestation();
     }
+
     @GetMapping("/firestation/adress/{adress}")
     public Firestation getFirestationByAdress(@PathVariable("adress") String adress){
        return firestationService.findFirestationByAdress(adress);
     }
-    @PostMapping("/firestation/add")
-    public void addFirestation(@RequestBody Firestation firestation){
-        firestationService.addFirestation(firestation);
-    }
+
+
 
 }

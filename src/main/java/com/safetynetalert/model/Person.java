@@ -1,5 +1,6 @@
 package com.safetynetalert.model;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
 import lombok.Data;
 
 @Data

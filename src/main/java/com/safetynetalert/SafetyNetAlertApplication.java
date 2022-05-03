@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 import static com.safetynetalert.repository.FirestationRepository.getFirestationByStation;
-import static com.safetynetalert.repository.PersonRepository.getByZip;
+import static com.safetynetalert.repository.PersonRepository.getByZip ;
 /**luncher of the application*/
 
 @SpringBootApplication
