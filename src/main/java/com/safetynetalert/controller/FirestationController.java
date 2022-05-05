@@ -31,7 +31,7 @@ public class FirestationController {
     }
 
     @GetMapping("/firestation/adress/{adress}")
-    public Firestation getFirestationByAdress(@PathVariable("adress") String adress){
+    public Firestation getFirestationByAdress(@PathVariable String adress){
        return firestationService.findFirestationByAdress(adress);
     }
 
