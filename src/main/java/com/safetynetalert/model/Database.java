@@ -11,34 +11,19 @@ import java.util.List;
 
 @Component
 public class Database {
-    private static List<Person> persons;
+    private static List<Person> person;
 
+   // @PostConstruct to initialize the static variable persons and map the json file data.json to the list persons.
     @PostConstruct
-    public static void initDb() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        persons = mapper.readValue(Files.readAllBytes(Paths.get("src/main/resources/persons.json")),
-                mapper.getTypeFactory().constructCollectionType(List.class, Person.class));
-
+    public static void init() throws IOException {
+        person = new ObjectMapper().readValue(Files.readAllBytes(Paths.get("data.json")), List.class);
     }
 
+    // Getter for the static variable persons.
     public static List<Person> getPersons() {
-        return persons;
+        return person;
     }
 }
 
 
 
-
-   /** @PostConstruct
-    public void init() throws IOException {
-        Database db = new Database();
-        byte[] dataJson = Files.readAllBytes(Paths.get("src/main/resources/Data.json"));
-
-        ObjectMapper om  = new ObjectMapper();
-        try {
-            db = om.readValue(dataJson, Database.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}*/
