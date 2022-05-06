@@ -31,5 +31,9 @@ public class PersonService {
     public List<String> findAllEmailsByCity(String city) {
         return personRepository.getAllEmailsByCity(city);
     }
+
+    public Person addPerson(Person person) {
+        return personRepository.add(person);
+    }
 }
 

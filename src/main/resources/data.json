@@ -65,7 +65,5 @@
     { "firstName":"Eric", "lastName":"Cadigan", "birthdate":"08/06/1945", "medications":["tradoxidine:400mg"], "allergies":[] }
   ],
 
-  "mapPersonFire" : [
-    {"station": "1", "idPerson": "1"}
-  ]
+
 }

@@ -13,7 +13,7 @@ public class MedicalRecordController {
     private MedicalRecordService medicalRecordService;
 
     @GetMapping("/medicalRecord/{firstName}/{lastName}")
-    public MedicalRecord getMedicalRecordByFirstNameAndLastName(@PathVariable String firstName, String lastName) {
+    public MedicalRecord getMedicalRecordByFirstNameAndLastName(@PathVariable String firstName,@PathVariable String lastName) {
         return medicalRecordService.findMedicalRecordByfIrstNameAndLastName(firstName, lastName);
     }
 }

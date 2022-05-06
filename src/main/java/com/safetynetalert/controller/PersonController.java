@@ -4,9 +4,7 @@ import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonService;
 import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,12 +33,19 @@ public class PersonController {
         return personService.findPersonByCity(city);
     }
 
+
     //TODO Recuperer tous les emails des habitants d'une ville
-    @GetMapping("/person/{city}/email")
-    public List<String> getEmailByCity(@PathVariable String city){
+    @GetMapping("/communityEmail")//http://localhost:8080/communityEmail?city=<city>
+    public List<String> getEmailByCity(@RequestParam String city){
         return personService.findAllEmailsByCity(city);
     }
 
-
+    //TODO add a person
+    @PostMapping("/person")
+    public Person addPerson(@RequestBody Person person){
+        return personService.addPerson(person);
+    }
+//TODO creer un objet personInfo qui va contenir les info de plusieur objet
+    // - repository recuperer la liste des personnes
 }
 

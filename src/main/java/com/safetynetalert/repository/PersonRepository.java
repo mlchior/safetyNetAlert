@@ -63,8 +63,12 @@ public class PersonRepository {
     }
 
 
+    public Person add(Person person) {
+        personsList.add(person);
+        System.out.println(person.getFirstName());
+        return person;
 
-
+    }
 }
 
 

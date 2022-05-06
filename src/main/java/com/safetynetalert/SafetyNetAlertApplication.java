@@ -25,7 +25,9 @@ public class SafetyNetAlertApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		Database.init();
+		Database database = new Database();
+
+		database.init();
 		FirestationRepository.initFirestation();
 		PersonRepository.initPersonList();
 		MedicalRecordRepository.initMedicalRecordList();
