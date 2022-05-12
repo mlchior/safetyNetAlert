@@ -17,6 +17,7 @@ public class PersonRepository {
         personsList.add(new Person("John", "Smith", "123 Main St.", "montrouge", "93400", "0634432234", "bilou@gmail.com"));
         personsList.add(new Person("andré", "tutu", "clef des champs", "paris", "75017", "0634437847636", "andre.tutu@gmail.com"));
         personsList.add(new Person("Yacine", "PE", "21 jump street", "Melbourne","55555", "0134567899","yacine@pole-emploi.fr"));
+        personsList.add(new Person("Laurence", "PE", "21 jump street", "Melbourne","55555", "0134567899","laurence@pe.fr"));
     }
 
     //trouver toutes les personnes
@@ -51,6 +52,17 @@ public class PersonRepository {
         }
         return null;
     }
+    //get all persons by zip
+
+    public List<String> getAllPersonByCity(String city) {
+        List<String> persons = new ArrayList<>();
+        for (Person person : personsList) {
+            if (person.getCity().equals(city)) {
+                persons.add(person.getFirstName() + " " + person.getLastName() + " " + person.getAddress()+" "+person.getPhone());
+            }
+        }
+            return persons;
+    }
 
     public List<String> getAllEmailsByCity(String city) {
         List<String> emails = new ArrayList<>();
@@ -69,7 +81,23 @@ public class PersonRepository {
         return person;
 
     }
-}
+
+    public Person delete(Person person) {
+        personsList.remove(person);
+        System.out.println(personsList);
+        return person;
+    }
+
+    public Person delete(String firstName, String lastName) {
+        Person person = getByFirstNameAndLastName(firstName, lastName);
+        return person;
+
+    }
+
+
+
+
+    }
 
 
 

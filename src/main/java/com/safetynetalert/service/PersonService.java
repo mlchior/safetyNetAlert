@@ -24,16 +24,27 @@ public class PersonService {
     public Person findPersonByZip(String zip) {
         return personRepository.getByZip(zip);
     }
-    public Person findPersonByCity(String city){
-        return personRepository.getByCity(city);
+    public List <String> findPersonByCity(String city){
+        return personRepository.getAllPersonByCity(city);
     }
     //TODO Recuperer tous les emails des habitants d'une ville
     public List<String> findAllEmailsByCity(String city) {
         return personRepository.getAllEmailsByCity(city);
     }
 
+
+
+
+
+
     public Person addPerson(Person person) {
         return personRepository.add(person);
+    }
+
+
+
+    public Person deletePerson(String firstName, String lastName) {
+        return personRepository.delete(firstName, lastName);
     }
 }
 

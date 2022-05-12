@@ -26,15 +26,33 @@ public class MedicalRecordRepository {
     }
 
 
- public static MedicalRecord getMedicalRecordByFirstNameAndLastName (String firstName, String lastName) {
-     for (MedicalRecord medicalRecord : medicalRecordList) {
-         if (medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)) {
-             return medicalRecord;
-         }
-     }
-     return null;
- }
+    public List<MedicalRecord> findAll() {
+        return medicalRecordList;
+    }
 
+    public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord) {
+        medicalRecordList.add(medicalRecord);
+        return medicalRecord;
+    }
 
+    public void deleteMedicalRecord(String firstName, String lastName) {
+        for (MedicalRecord medicalRecord : medicalRecordList) {
+            if (medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)) {
+                medicalRecordList.remove(medicalRecord);
+                break;
+            }
+        }
 
+    }
+
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
+        for (MedicalRecord medicalRecord1 : medicalRecordList) {
+            if (medicalRecord1.getFirstName().equals(medicalRecord.getFirstName()) && medicalRecord1.getLastName().equals(medicalRecord.getLastName())) {
+                medicalRecordList.remove(medicalRecord1);
+                medicalRecordList.add(medicalRecord);
+                break;
+            }
+        }
+        return medicalRecord;
+    }
 }

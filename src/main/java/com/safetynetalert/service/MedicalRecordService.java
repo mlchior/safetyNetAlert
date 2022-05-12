@@ -11,8 +11,20 @@ public class MedicalRecordService {
     @Autowired
     private MedicalRecordRepository medicalRecordRepository;
 
-    public MedicalRecord findMedicalRecordByfIrstNameAndLastName(String firstName, String lastName) {
-        return medicalRecordRepository.getMedicalRecordByFirstNameAndLastName(firstName, lastName);
-}
 
+    public Iterable<MedicalRecord> getAllMedicalRecords() {
+        return medicalRecordRepository.findAll();
+    }
+
+    public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord) {
+        return medicalRecordRepository.addMedicalRecord(medicalRecord);
+    }
+
+    public void deleteMedicalRecord(String firstName, String lastName) {
+        medicalRecordRepository.deleteMedicalRecord(firstName, lastName);
+    }
+
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
+        return medicalRecordRepository.updateMedicalRecord(medicalRecord);
+    }
 }

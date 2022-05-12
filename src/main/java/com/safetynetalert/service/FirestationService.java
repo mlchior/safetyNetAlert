@@ -11,20 +11,25 @@ public class FirestationService {
     @Autowired
     private FirestationRepository firestationRepository;
 
-    public Firestation findFirestationByStation(int station){
-        return (firestationRepository.getFirestationByStation(station));
-    }
-    public Firestation findFirestationByAdress(String adress){
-        return (firestationRepository.getFirestationByAddress(adress));
-    }
+
 
     public List<Firestation> findAllFirestation() {
         return firestationRepository.getAllFirestation();
     }
-    //TODO: Add a method to add a new firestation to firestationList
-    public void addFirestation(Firestation firestation) {
-        firestationRepository.save(firestation);
+
+    public Firestation addFirestation(Firestation firestation) {
+        return firestationRepository.addFirestation(firestation);
     }
+
+    public void deleteFirestation(String adress) {
+        firestationRepository.deleteFirestation(adress);
+    }
+
+    public Firestation updateFirestation(Firestation firestation) {
+        return firestationRepository.updateFirestation(firestation);
+    }
+
+
 
 
 

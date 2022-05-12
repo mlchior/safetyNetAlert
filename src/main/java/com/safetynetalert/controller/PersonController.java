@@ -24,14 +24,21 @@ public class PersonController {
     }
 
    @GetMapping("/person/{zip}")
-    public Person getByZip(@PathVariable String zip){
+    public Person getByZip(@RequestParam String zip){
         return personService.findPersonByZip(zip);
     }
 
-   @GetMapping("/person/{city}")
-    public Person getByCity(@PathVariable String city){
-        return personService.findPersonByCity(city);
-    }
+
+
+  /* @GetMapping("/person")
+   public Person getByCity(@RequestParam String city){
+       return personService.findPersonByCity(city);
+   }*/
+
+   @GetMapping("/person")
+   public List<String> getAllPersonByCity(@RequestParam String city){
+       return personService.findPersonByCity(city);
+   }
 
 
     //TODO Recuperer tous les emails des habitants d'une ville
@@ -46,6 +53,11 @@ public class PersonController {
         return personService.addPerson(person);
     }
 //TODO creer un objet personInfo qui va contenir les info de plusieur objet
-    // - repository recuperer la liste des personnes
+    //TODO delete a person with firstName and lastName
+    @DeleteMapping("/person")
+    public Person deletePerson(@RequestParam String firstName, @RequestParam String lastName){
+        return personService.deletePerson(firstName, lastName);
+    }
+
 }
 
