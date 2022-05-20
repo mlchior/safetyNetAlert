@@ -116,6 +116,24 @@ public class PersonRepository {
         return personToUpdate;
     }
 
+    public List<String> getAllEmailByCity(String city) {
+        List<String> emails = new ArrayList<>();
+        for (Person person : personsList) {
+            if (person.getCity().equals(city)) {
+                emails.add(person.getEmail());
+            }
+        }
+        return emails;
+    }
+
+
+    public Person getPersonInfo(String firstName, String lastName) {
+        Person person = getByFirstNameAndLastName(firstName, lastName);
+        if (person != null) {
+            return person;
+        }
+        return null;
+    }
 }
 
 

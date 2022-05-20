@@ -31,6 +31,13 @@ public class PersonController {
         return personService.updatePerson(person);
 
     }
+
+    @GetMapping("/communityEmail")
+    public List<String> getAllEmailByCity(@RequestParam String city){
+        return personService.getAllEmailByCity(city);
+    }
+
+
     @GetMapping("/personInfo")
     public Person getPersonInfo(@RequestParam String firstName, @RequestParam String lastName){
         return personService.getPersonInfo(firstName, lastName);
@@ -39,4 +46,5 @@ public class PersonController {
 
 
 }
+
 

@@ -42,6 +42,16 @@ public class PersonService {
     }
 
 
+
+    public Person getPersonInfo(String firstName, String lastName) {
+        return personRepository.getPersonInfo(firstName, lastName);
+    }
+
+    public List<String> getAllEmailByCity(String city) {
+        return personRepository.getAllEmailByCity(city);
+    }
+
+
     //je donner en paramettre le nom et prenom de la personne
     //je creer une nouvelle list personsInfoList
     // si firstName et lastName de personsList == firstName et lastName de medicalRecord
