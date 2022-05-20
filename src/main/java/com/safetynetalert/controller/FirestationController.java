@@ -1,6 +1,7 @@
 package com.safetynetalert.controller;
 
 import com.safetynetalert.model.Firestation;
+import com.safetynetalert.model.Person;
 import com.safetynetalert.service.FirestationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,13 @@ public class FirestationController {
     public Firestation updateFirestation(@RequestBody Firestation firestation) {
         return firestationService.updateFirestation(firestation);
     }
+    @GetMapping("/firestation/station")
+    public List<Person> PersonByFirestation(@RequestParam int station) {
+        return firestationService.findPersonByStation(station);
+    }
 
 
 }
-   /* @GetMapping("/firestation")//http://localhost:8080/firestation?stationNumber=<station_number>
-    //return List of person with the same station number of the parameter/*/
 
 
 

@@ -13,51 +13,30 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping("/person/all")
+    @GetMapping("/person")
     public List<Person> getAllPerson(){
         return personService.findAllPerson();
     }
 
-    @GetMapping("/person/{firstName}/{lastName}")
-    public Person getByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName){
-        return personService.findPersonByFirstNameAndLastName(firstName, lastName);
-    }
-
-   @GetMapping("/person/{zip}")
-    public Person getByZip(@RequestParam String zip){
-        return personService.findPersonByZip(zip);
-    }
-
-
-
-  /* @GetMapping("/person")
-   public Person getByCity(@RequestParam String city){
-       return personService.findPersonByCity(city);
-   }*/
-
-   @GetMapping("/person")
-   public List<String> getAllPersonByCity(@RequestParam String city){
-       return personService.findPersonByCity(city);
-   }
-
-
-    //TODO Recuperer tous les emails des habitants d'une ville
-    @GetMapping("/communityEmail")//http://localhost:8080/communityEmail?city=<city>
-    public List<String> getEmailByCity(@RequestParam String city){
-        return personService.findAllEmailsByCity(city);
-    }
-
-    //TODO add a person
     @PostMapping("/person")
     public Person addPerson(@RequestBody Person person){
         return personService.addPerson(person);
     }
-//TODO creer un objet personInfo qui va contenir les info de plusieur objet
-    //TODO delete a person with firstName and lastName
     @DeleteMapping("/person")
     public Person deletePerson(@RequestParam String firstName, @RequestParam String lastName){
         return personService.deletePerson(firstName, lastName);
     }
+    @PutMapping("/person")
+    public Person updatePerson(@RequestBody Person person){
+        return personService.updatePerson(person);
+
+    }
+    @GetMapping("/personInfo")
+    public Person getPersonInfo(@RequestParam String firstName, @RequestParam String lastName){
+        return personService.getPersonInfo(firstName, lastName);
+    }
+
+
 
 }
 

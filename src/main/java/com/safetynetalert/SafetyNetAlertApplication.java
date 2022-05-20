@@ -28,14 +28,11 @@ public class SafetyNetAlertApplication implements CommandLineRunner {
 		PersonRepository.initPersonList();
 		MedicalRecordRepository.initMedicalRecordList();
 
-        System.out.println(getByZip("12345"));
-		System.out.println("Hello World!");
-		System.out.println(getByZip("55555"));
 
 		}
 
 
 
-	;
+
 	}
 

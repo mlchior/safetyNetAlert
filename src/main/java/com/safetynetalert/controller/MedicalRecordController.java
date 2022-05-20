@@ -15,7 +15,7 @@ public class MedicalRecordController {
         return medicalRecordService.getAllMedicalRecords();
     }
     @PostMapping("/medicalRecord")
-    public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord) {
+    public MedicalRecord addMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         return medicalRecordService.addMedicalRecord(medicalRecord);
     }
     @DeleteMapping("/medicalRecord")
@@ -24,7 +24,7 @@ public class MedicalRecordController {
     }
     @PutMapping("/medicalRecord")
     // update the medical record using the first name and last name
-    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
+    public MedicalRecord updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         return medicalRecordService.updateMedicalRecord(medicalRecord);
     }
 

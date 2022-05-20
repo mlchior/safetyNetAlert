@@ -1,12 +1,10 @@
 package com.safetynetalert.repository;
 
-import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.Person;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Repository
 public class PersonRepository {
@@ -18,10 +16,13 @@ public class PersonRepository {
         personsList.add(new Person("andré", "tutu", "clef des champs", "paris", "75017", "0634437847636", "andre.tutu@gmail.com"));
         personsList.add(new Person("Yacine", "PE", "21 jump street", "Melbourne","55555", "0134567899","yacine@pole-emploi.fr"));
         personsList.add(new Person("Laurence", "PE", "21 jump street", "Melbourne","55555", "0134567899","laurence@pe.fr"));
+        personsList.add(new Person("Didier","maraux","paris","paris","75017","0123456789","dier.maraux@gmail.com"));
+        personsList.add(new Person("Didierporeferji","marferferfaux","paris","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
+        personsList.add(new Person("Didierpoferferferfreferji","marferfezrfzerfferfaux","london","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
     }
 
     //trouver toutes les personnes
-    public static ArrayList<Person> getAll() {
+    public  ArrayList<Person> getAll() {
         return personsList;
     }
 // trouver une personne par son nom
@@ -34,7 +35,16 @@ public class PersonRepository {
         }
         return null;
     }
+    public List <Person>  getByAdress(String adress) {
+        List<Person> persons = new ArrayList<>();
+        for (Person person : personsList) {
+            if (person.getAdress().toLowerCase().equals(adress.toLowerCase())) {
+                persons.add(person);
+            }
 
+        }
+        return persons;
+    }
     public static Person getByZip(String zip) {
         for (int i = 0; i < personsList.size(); i++) {
             if (personsList.get(i).getZip().equals(zip)) {
@@ -58,7 +68,7 @@ public class PersonRepository {
         List<String> persons = new ArrayList<>();
         for (Person person : personsList) {
             if (person.getCity().equals(city)) {
-                persons.add(person.getFirstName() + " " + person.getLastName() + " " + person.getAddress()+" "+person.getPhone());
+                persons.add(person.getFirstName() + " " + person.getLastName() + " " + person.getAdress()+" "+person.getPhone());
             }
         }
             return persons;
@@ -82,22 +92,31 @@ public class PersonRepository {
 
     }
 
-    public Person delete(Person person) {
-        personsList.remove(person);
-        System.out.println(personsList);
-        return person;
-    }
 
-    public Person delete(String firstName, String lastName) {
+    public Person deletePerson(String firstName, String lastName) {
         Person person = getByFirstNameAndLastName(firstName, lastName);
+        if (person != null) {
+            personsList.remove(person);
+
+        }
         return person;
-
     }
 
-
-
-
+    public Person update(Person person) {
+        Person personToUpdate = getByFirstNameAndLastName(person.getFirstName(), person.getLastName());
+        if (personToUpdate != null) {
+            personToUpdate.setFirstName(person.getFirstName());
+            personToUpdate.setLastName(person.getLastName());
+            personToUpdate.setAdress(person.getAdress());
+            personToUpdate.setCity(person.getCity());
+            personToUpdate.setZip(person.getZip());
+            personToUpdate.setPhone(person.getPhone());
+            personToUpdate.setEmail(person.getEmail());
+        }
+        return personToUpdate;
     }
+
+}
 
 
 

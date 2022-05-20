@@ -27,4 +27,5 @@ public class MedicalRecordService {
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
         return medicalRecordRepository.updateMedicalRecord(medicalRecord);
     }
+
 }
