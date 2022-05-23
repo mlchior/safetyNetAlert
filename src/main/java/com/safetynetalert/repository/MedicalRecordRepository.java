@@ -64,6 +64,15 @@ public class MedicalRecordRepository {
         }
         return updateMedicalRecord;
     }
+
+    public MedicalRecord findOneMedicalRecord(String firstName, String lastName) {
+        for (MedicalRecord medicalRecord : medicalRecordList) {
+            if (medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)) {
+                return medicalRecord;
+            }
+
+        }return null;
+    }
     /*public Person update(Person person) {
         Person personToUpdate = getByFirstNameAndLastName(person.getFirstName(), person.getLastName());
         if (personToUpdate != null) {

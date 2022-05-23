@@ -10,6 +10,7 @@ public class Firestation {
     private String adress;
     private int station;
 
+
     public Firestation(String adress, int station) {
         this.adress = adress;
         this.station = station;

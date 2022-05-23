@@ -1,7 +1,6 @@
 package com.safetynetalert.service;
 
 import com.safetynetalert.model.MedicalRecord;
-import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,9 @@ public class MedicalRecordService {
     public void deleteMedicalRecord(String firstName, String lastName) {
         medicalRecordRepository.deleteMedicalRecord(firstName, lastName);
     }
+    /*public getOneMedicalRecord(String firstName, String lastName){
+        medicalRecordRepository.findOneMedicalRecord(firstName,lastName);
+    }*/
 
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
         return medicalRecordRepository.updateMedicalRecord(medicalRecord);
