@@ -1,5 +1,6 @@
 package com.safetynetalert.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -11,6 +12,7 @@ public class Person {
     private String zip;
     private String phone;
     private String email;
+
 
     // age
     // int child

@@ -1,14 +1,22 @@
 package com.safetynetalert.service;
 import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
+import com.safetynetalert.DTO.link1.StationInfo;
 import com.safetynetalert.model.Firestation;
+import com.safetynetalert.model.MedicalRecord;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
+import com.safetynetalert.repository.MedicalRecordRepository;
 import com.safetynetalert.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class FirestationService {
@@ -17,7 +25,7 @@ public class FirestationService {
     @Autowired
     private PersonRepository personRepository;
     @Autowired
-    private MedicalRecordService medicalRecordService;
+    private MedicalRecordRepository medicalRecordRepository;
 
 
     public List<Firestation> findAllFirestation() {
@@ -55,7 +63,7 @@ public class FirestationService {
 
 
 
-    public List<PersonCoverByFirestation> findPersonsByStation(int station) {
+   /** public List<PersonCoverByFirestation> findPersonsByStation(int station) {
         List<PersonCoverByFirestation> result = new ArrayList<>();
         List<Person> persons = personRepository.getAll();
         for (Person person : persons) {
@@ -71,7 +79,78 @@ public class FirestationService {
         System.out.println(result);
         return result;
 
+    }**/
+    /*retourner une liste des personnes couvertes par la caserne de pompiers correspondante.
+Donc, si le numéro de station = 1, elle doit renvoyer les habitants couverts par la station numéro 1. La liste
+doit inclure les informations spécifiques suivantes : prénom, nom, adresse, numéro de téléphone. De plus,
+elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants (tout individu âgé de 18 ans ou
+moins) dans la zone desservie.**/
+
+
+
+    public List<StationInfo> findStationInfo(int station) {
+        List<StationInfo> stationInfosList = new ArrayList<>();
+        List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
+        List<Person> persons = personRepository.getAll();
+        List<MedicalRecord> MedicalRecords = medicalRecordRepository.findAll();
+        List<Integer> ageList = new ArrayList<>();
+        int numberOfAdult = 0;
+        int numberOfChild = 0;
+
+        String adress = firestationRepository.getFirestationByAdress(station).getAdress().toLowerCase();
+        for (Person person : persons) {
+            if (person.getAdress().toLowerCase().equals(adress)) {
+                PersonCoverByFirestation personCoverByStation = new PersonCoverByFirestation();
+                personCoverByStation.setFirstName(person.getFirstName());
+                personCoverByStation.setLastName(person.getLastName());
+                personCoverByStation.setAddress(person.getAdress());
+                personCoverByStation.setPhone(person.getPhone());
+                personCoverByFirestationList.add(personCoverByStation);
+
+            }
+            //findMedicalRecordByFirstNameAndLastName of personCoverByFirestationList and return all birthDate
+            for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
+                for (MedicalRecord medicalRecord : MedicalRecords) {
+                    if (medicalRecord.getFirstName().equals(personCoverByFirestation.getFirstName()) && medicalRecord.getLastName().equals(personCoverByFirestation.getLastName())) {
+                        personCoverByFirestation.setBirthDate(medicalRecord.getBirthDate());
+                    }
+                }
+            }
+        }
+        //Calculate age of each person and add it to the list
+        for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate birth = personCoverByFirestation.getBirthDate();
+            LocalDate now = LocalDate.now();
+            Period period = Period.between(now, birth);
+            personCoverByFirestation.setAge(period.getYears());
+        }
+
+
+
+        for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
+            if (personCoverByFirestation.getAge() >= 18) {
+                numberOfAdult++;
+            }else{
+                        numberOfChild++;
+            }
+
+        }
+        //create new StationInfo  and add it to the list
+        StationInfo stationInfo = new StationInfo(personCoverByFirestationList, numberOfAdult, numberOfChild);
+        stationInfo.setNumberOfAdult(numberOfAdult);
+        stationInfo.setNumberOfChild(numberOfChild);
+        stationInfosList.add(stationInfo);
+        return stationInfosList;
     }
+
+
+
+
+
+
+
+
 
 
 

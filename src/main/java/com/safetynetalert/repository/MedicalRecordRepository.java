@@ -5,6 +5,7 @@ import com.safetynetalert.model.MedicalRecord;
 import com.safetynetalert.service.MedicalRecordService;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,8 @@ public class MedicalRecordRepository {
     private static ArrayList<String> allergies1 = new ArrayList<>();
     private static List<String> medication2 = new ArrayList<>();
     private static List<String> allergies2 = new ArrayList<>();
+
+
     public static void initMedicalRecordList() {
         medication1.add("Aspirin");
         medication1.add("Paracetamol");
@@ -28,7 +31,9 @@ public class MedicalRecordRepository {
         medication2.add("Ibuprofen");
         allergies2.add("Penicillin");
         allergies2.add("Sulfa");
-        Date date = new Date("01/01/1990");
+
+        LocalDate date = LocalDate.of(1990, 1, 1);
+
         medicalRecordList.add(new MedicalRecord("John", "Doe", date,medication1,allergies1));
         medicalRecordList.add(new MedicalRecord("Didier", "maraux", date,medication2,allergies2));
     }

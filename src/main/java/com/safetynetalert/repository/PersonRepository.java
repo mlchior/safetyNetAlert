@@ -1,5 +1,7 @@
 package com.safetynetalert.repository;
 
+import com.safetynetalert.DTO.link1.StationInfo;
+import com.safetynetalert.DTO.link3.PhoneAlert;
 import com.safetynetalert.model.Person;
 import org.springframework.stereotype.Repository;
 
@@ -11,12 +13,12 @@ public class PersonRepository {
     private static ArrayList<Person> personsList = new ArrayList<>();
 
     public static void initPersonList() {
-        personsList.add(new Person("John", "Doe", "clef des champs", "Melbourne", "55555", "0634437847636", "boulou@gmail.com"));
+        personsList.add(new Person("John", "Doe", "Melbourne", "Melbourne", "55555", "0634437847636", "boulou@gmail.com"));
         personsList.add(new Person("John", "Smith", "123 Main St.", "montrouge", "93400", "0634432234", "bilou@gmail.com"));
         personsList.add(new Person("andré", "tutu", "clef des champs", "paris", "75017", "0634437847636", "andre.tutu@gmail.com"));
         personsList.add(new Person("Yacine", "PE", "21 jump street", "Melbourne","55555", "0134567899","yacine@pole-emploi.fr"));
         personsList.add(new Person("Laurence", "PE", "21 jump street", "Melbourne","55555", "0134567899","laurence@pe.fr"));
-        personsList.add(new Person("Didier","maraux","paris","paris","75017","0123456789","dier.maraux@gmail.com"));
+        personsList.add(new Person("Didier","maraux","Melbourne","Melbourne","75017","0123456789","dier.maraux@gmail.com"));
         personsList.add(new Person("Didierporeferji","marferferfaux","paris","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
         personsList.add(new Person("Didierpoferferferfreferji","marferfezrfzerfferfaux","london","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
     }
@@ -134,7 +136,20 @@ public class PersonRepository {
         }
         return null;
     }
-}
+
+
+    public Person findMedicalRecord(String firstName, String lastName) {
+        Person person = getByFirstNameAndLastName(firstName, lastName);
+        if (person != null) {
+            return person;
+        }
+        return null;
+    }
+
+
+    }
+
+
 
 
 

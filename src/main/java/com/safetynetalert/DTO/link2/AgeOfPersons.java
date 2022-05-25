@@ -1,4 +1,4 @@
-package com.safetynetalert.DTO;
+package com.safetynetalert.DTO.link2;
 
 public class AgeOfPersons {
     private String firstName;

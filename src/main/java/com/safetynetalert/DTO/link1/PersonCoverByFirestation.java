@@ -1,16 +1,25 @@
 package com.safetynetalert.DTO.link1;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class PersonCoverByFirestation {
     private String firstName;
     private String lastName;
     private String address;
     private String phone;
+    private LocalDate birthDate;
+    private int age;
+
 
     public PersonCoverByFirestation() {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
+        this.birthDate = birthDate;
+        this.age = age;
+
     }
 
     public String getFirstName() {
@@ -43,5 +52,21 @@ public class PersonCoverByFirestation {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

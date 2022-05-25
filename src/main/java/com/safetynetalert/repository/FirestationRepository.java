@@ -1,5 +1,6 @@
 package com.safetynetalert.repository;
-
+import com.safetynetalert.DTO.link1.StationInfo;
+import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.Person;
 import org.springframework.stereotype.Repository;
@@ -67,6 +68,8 @@ public class FirestationRepository {
         }
         return null;
     }
+
+
 
 
 // comparer dans ma liste de firestation et ma liste de Person. Si des adresses son commune alors on ajoute les personnes dans la liste de firestation
