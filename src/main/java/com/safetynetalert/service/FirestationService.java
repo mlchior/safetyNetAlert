@@ -122,7 +122,7 @@ moins) dans la zone desservie.**/
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate birth = personCoverByFirestation.getBirthDate();
             LocalDate now = LocalDate.now();
-            Period period = Period.between(now, birth);
+            Period period = Period.between(birth, now);
             personCoverByFirestation.setAge(period.getYears());
         }
 
@@ -191,6 +191,10 @@ moins) dans la zone desservie.**/
     ca renvoi Listadress de cette station;
     pour chaque une des adress de la liststation;
     jajoute a ma liste gens les gens habitant a chacune de ces adress*/
+
+    /**LINK 2*/
+
+
 }
 
 

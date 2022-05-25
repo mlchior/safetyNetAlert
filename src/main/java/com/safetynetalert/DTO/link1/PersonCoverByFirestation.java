@@ -1,5 +1,8 @@
 package com.safetynetalert.DTO.link1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -8,7 +11,9 @@ public class PersonCoverByFirestation {
     private String lastName;
     private String address;
     private String phone;
+    @JsonIgnore
     private LocalDate birthDate;
+    @JsonIgnore
     private int age;
 
 
