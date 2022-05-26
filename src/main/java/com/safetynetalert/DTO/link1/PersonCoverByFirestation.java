@@ -13,7 +13,7 @@ public class PersonCoverByFirestation {
     private String phone;
     @JsonIgnore
     private LocalDate birthDate;
-    @JsonIgnore
+
     private int age;
 
 

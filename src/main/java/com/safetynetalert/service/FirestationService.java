@@ -63,7 +63,7 @@ public class FirestationService {
 
 
 
-   /** public List<PersonCoverByFirestation> findPersonsByStation(int station) {
+   /* public List<PersonCoverByFirestation> findPersonsByStation(int station) {
         List<PersonCoverByFirestation> result = new ArrayList<>();
         List<Person> persons = personRepository.getAll();
         for (Person person : persons) {
@@ -79,7 +79,7 @@ public class FirestationService {
         System.out.println(result);
         return result;
 
-    }**/
+    }*/
     /*retourner une liste des personnes couvertes par la caserne de pompiers correspondante.
 Donc, si le numéro de station = 1, elle doit renvoyer les habitants couverts par la station numéro 1. La liste
 doit inclure les informations spécifiques suivantes : prénom, nom, adresse, numéro de téléphone. De plus,
@@ -119,7 +119,6 @@ moins) dans la zone desservie.**/
         }
         //Calculate age of each person and add it to the list
         for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate birth = personCoverByFirestation.getBirthDate();
             LocalDate now = LocalDate.now();
             Period period = Period.between(birth, now);
@@ -143,6 +142,20 @@ moins) dans la zone desservie.**/
         stationInfosList.add(stationInfo);
         return stationInfosList;
     }
+//Cette url doit retourner une liste des numéros de téléphone des résidents desservis par la caserne de
+//pompiers. Nous l'utiliserons pour envoyer des messages texte d'urgence à des foyers spécifiques.
+    public List<String> findPhoneAlert(int station) {
+    List<String> phoneAlertList = new ArrayList<>();
+    List<Person> persons = personRepository.getAll();
+    String adress = firestationRepository.getFirestationByAdress(station).getAdress().toLowerCase();
+    for (Person person : persons) {
+        if (person.getAdress().toLowerCase().equals(adress)) {
+            phoneAlertList.add(person.getPhone());
+        }
+    }
+    return phoneAlertList;
+    }
+}
 
 
 
@@ -195,7 +208,9 @@ moins) dans la zone desservie.**/
     /**LINK 2*/
 
 
-}
+
+
+
 
 
 

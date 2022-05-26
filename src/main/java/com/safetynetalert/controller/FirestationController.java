@@ -42,6 +42,10 @@ public class FirestationController {
     public List<StationInfo> findStationInfo(@RequestParam int station) {
         return firestationService.findStationInfo(station);
     }
+    @GetMapping("/firestation/phonenumberbystation")
+    public List<String> phoneAlert (@RequestParam int station) {
+        return firestationService.findPhoneAlert(station);
+    }
 }
 
 
