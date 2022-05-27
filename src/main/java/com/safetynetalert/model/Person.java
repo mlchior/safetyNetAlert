@@ -1,13 +1,12 @@
 package com.safetynetalert.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
 public class Person {
     private String firstName;
     private String lastName;
-    private String adress;
+    private String address;
     private String city;
     private String zip;
     private String phone;
@@ -21,12 +20,13 @@ public class Person {
     public Person(String firstName, String lastName, String address, String city, String zip, String phone, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.adress = address;
+        this.address = address;
         this.city = city;
         this.zip = zip;
         this.phone = phone;
         this.email = email;
     }
+    public Person(){}
 
     public String getFirstName() {
         return firstName;
@@ -44,12 +44,12 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCity() {

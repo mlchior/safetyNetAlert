@@ -1,6 +1,7 @@
 package com.safetynetalert;
 
 
+import com.safetynetalert.model.Database;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordRepository;
 import com.safetynetalert.repository.PersonRepository;
@@ -27,6 +28,9 @@ public class SafetyNetAlertApplication implements CommandLineRunner {
 		FirestationRepository.initFirestation();
 		PersonRepository.initPersonList();
 		MedicalRecordRepository.initMedicalRecordList();
+		Database db = new Database();
+		db.init();
+
 
 
 		}

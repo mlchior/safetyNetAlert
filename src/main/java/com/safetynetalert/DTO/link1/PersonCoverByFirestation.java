@@ -13,7 +13,7 @@ public class PersonCoverByFirestation {
     private String phone;
     @JsonIgnore
     private LocalDate birthDate;
-
+    @JsonIgnore
     private int age;
 
 
@@ -74,4 +74,5 @@ public class PersonCoverByFirestation {
     public int getAge() {
         return age;
     }
+   /****/
 }

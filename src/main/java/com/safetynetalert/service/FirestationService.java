@@ -12,11 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class FirestationService {
@@ -93,17 +90,16 @@ moins) dans la zone desservie.**/
         List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
         List<Person> persons = personRepository.getAll();
         List<MedicalRecord> MedicalRecords = medicalRecordRepository.findAll();
-        List<Integer> ageList = new ArrayList<>();
         int numberOfAdult = 0;
         int numberOfChild = 0;
 
         String adress = firestationRepository.getFirestationByAdress(station).getAdress().toLowerCase();
         for (Person person : persons) {
-            if (person.getAdress().toLowerCase().equals(adress)) {
+            if (person.getAddress().toLowerCase().equals(adress)) {
                 PersonCoverByFirestation personCoverByStation = new PersonCoverByFirestation();
                 personCoverByStation.setFirstName(person.getFirstName());
                 personCoverByStation.setLastName(person.getLastName());
-                personCoverByStation.setAddress(person.getAdress());
+                personCoverByStation.setAddress(person.getAddress());
                 personCoverByStation.setPhone(person.getPhone());
                 personCoverByFirestationList.add(personCoverByStation);
 
@@ -149,7 +145,7 @@ moins) dans la zone desservie.**/
     List<Person> persons = personRepository.getAll();
     String adress = firestationRepository.getFirestationByAdress(station).getAdress().toLowerCase();
     for (Person person : persons) {
-        if (person.getAdress().toLowerCase().equals(adress)) {
+        if (person.getAddress().toLowerCase().equals(adress)) {
             phoneAlertList.add(person.getPhone());
         }
     }

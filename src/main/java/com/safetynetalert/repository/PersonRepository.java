@@ -1,7 +1,5 @@
 package com.safetynetalert.repository;
 
-import com.safetynetalert.DTO.link1.StationInfo;
-import com.safetynetalert.DTO.link3.PhoneAlert;
 import com.safetynetalert.model.Person;
 import org.springframework.stereotype.Repository;
 
@@ -40,7 +38,7 @@ public class PersonRepository {
     public List <Person>  getByAdress(String adress) {
         List<Person> persons = new ArrayList<>();
         for (Person person : personsList) {
-            if (person.getAdress().toLowerCase().equals(adress.toLowerCase())) {
+            if (person.getAddress().toLowerCase().equals(adress.toLowerCase())) {
                 persons.add(person);
             }
 
@@ -70,7 +68,7 @@ public class PersonRepository {
         List<String> persons = new ArrayList<>();
         for (Person person : personsList) {
             if (person.getCity().equals(city)) {
-                persons.add(person.getFirstName() + " " + person.getLastName() + " " + person.getAdress()+" "+person.getPhone());
+                persons.add(person.getFirstName() + " " + person.getLastName() + " " + person.getAddress()+" "+person.getPhone());
             }
         }
             return persons;
@@ -109,7 +107,7 @@ public class PersonRepository {
         if (personToUpdate != null) {
             personToUpdate.setFirstName(person.getFirstName());
             personToUpdate.setLastName(person.getLastName());
-            personToUpdate.setAdress(person.getAdress());
+            personToUpdate.setAddress(person.getAddress());
             personToUpdate.setCity(person.getCity());
             personToUpdate.setZip(person.getZip());
             personToUpdate.setPhone(person.getPhone());
