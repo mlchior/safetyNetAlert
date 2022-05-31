@@ -1,14 +1,19 @@
 package com.safetynetalert.repository;
 
 import com.safetynetalert.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import com.safetynetalert.model.Database;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class PersonRepository {
     private static ArrayList<Person> personsList = new ArrayList<>();
+    private List<Person> persons;
+    @Autowired
+    private Database database;
+
 
     public static void initPersonList() {
         personsList.add(new Person("John", "Doe", "Melbourne", "Melbourne", "55555", "0634437847636", "boulou@gmail.com"));
@@ -19,11 +24,17 @@ public class PersonRepository {
         personsList.add(new Person("Didier","maraux","Melbourne","Melbourne","75017","0123456789","dier.maraux@gmail.com"));
         personsList.add(new Person("Didierporeferji","marferferfaux","paris","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
         personsList.add(new Person("Didierpoferferferfreferji","marferfezrfzerfferfaux","london","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
+
     }
+    // add persons List of Database in the ArrayList
+
+
+
+
 
     //trouver toutes les personnes
-    public  ArrayList<Person> getAll() {
-        return personsList;
+    public  List<Person> getAll() {
+        return database.getPersons();
     }
 // trouver une personne par son nom
 

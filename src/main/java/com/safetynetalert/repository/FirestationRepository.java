@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class FirestationRepository {
+public class FirestationRepository implements IFirestationRepository{
     private static ArrayList<Firestation> firestationList = new ArrayList<>();
 
     public static void initFirestation() {
+
         Firestation firestation = new Firestation("21 jump street", 3);
         firestationList.add(firestation);
         firestation = new Firestation("Paris", 2);

@@ -18,9 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-
+@Component
 public class Database {
     private static List<Person> persons;
+    private static List<Firestation> firestations;
+    private static List<MedicalRecord>      medicalRecords;
+
 
     private InputStreamReader getInputStreamReader() throws IOException{
         File file = new File("/Users/melchior/safetyNetAlert/src/main/resources/data.json");
@@ -30,40 +33,54 @@ public class Database {
 
     // @PostConstruct to initialize the static variable persons and map the json file data.json to the list persons.
     @PostConstruct
-    public void init() throws IOException, ParseException {
+    public void init() throws IOException{
 
         JSONParser parser = new JSONParser();
         ObjectMapper mapper = new ObjectMapper();
-        persons = new ArrayList<Person>();
+        persons = new ArrayList<>();
+        firestations = new ArrayList<>();
+        medicalRecords = new ArrayList<>();
+        InputStreamReader inputStreamReader = getInputStreamReader();
+
 
         try {
-            InputStreamReader inputStreamReader = getInputStreamReader();
+
             JSONObject object = (JSONObject) parser.parse(inputStreamReader);
             JSONArray jsonArray = (JSONArray) object.get("persons");
-            // iterer sur Array
             ListIterator<JSONObject> listPersons = jsonArray.listIterator();
             while(listPersons.hasNext()){
                 persons.add(mapper.readValue(listPersons.next().toString(), Person.class));
             }
         }catch(ParseException e)
-        {e.printStackTrace();
+            {e.printStackTrace();
         }
-
         for(int i =0; i<persons.size(); i++){
             System.out.println(persons.get(i).getFirstName());
-
-
         }
-        /*for (int i = 0; i < firestationList.size(); i++) {
-            if (firestationList.get(i).getAdress().equals(address)) {
-                return firestationList.get(i);
-            }**/
-    }
-     /*   persons = new ObjectMapper().readValue(new File("src/main/ressource/data.json"), List.class);
-    }**/
 
-    // Getter for the static variable persons.
+    }
+
     public static List<Person> getPersons() {
         return persons;
+    }
+
+    public static List<Firestation> getFirestations() {
+        return firestations;
+    }
+
+    public static List<MedicalRecord> getMedicalRecords() {
+        return medicalRecords;
+    }
+
+    public static void setPersons(List<Person> persons) {
+        Database.persons = persons;
+    }
+
+    public static void setFirestations(List<Firestation> firestations) {
+        Database.firestations = firestations;
+    }
+
+    public static void setMedicalRecords(List<MedicalRecord> medicalRecords) {
+        Database.medicalRecords = medicalRecords;
     }
 }

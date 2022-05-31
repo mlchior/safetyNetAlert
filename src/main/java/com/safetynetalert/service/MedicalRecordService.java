@@ -30,4 +30,5 @@ public class MedicalRecordService {
         return medicalRecordRepository.updateMedicalRecord(medicalRecord);
     }
 
+
 }

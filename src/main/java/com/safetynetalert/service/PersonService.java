@@ -58,6 +58,10 @@ public class PersonService {
         return personRepository.getAllEmailByCity(city);
     }
 
+    public Person getByFirstNameAndLastName(String firstName, String lastName) {
+        return personRepository.getByFirstNameAndLastName(firstName, lastName);
+    }
+
 
     //je donner en paramettre le nom et prenom de la personne
     //je creer une nouvelle list personsInfoList
