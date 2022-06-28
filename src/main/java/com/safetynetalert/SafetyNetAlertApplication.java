@@ -1,7 +1,9 @@
 package com.safetynetalert;
 
 
+import antlr.CharQueue;
 import com.safetynetalert.model.Database;
+import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordRepository;
 import com.safetynetalert.repository.PersonRepository;
@@ -14,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.util.List;
 
 import static com.safetynetalert.repository.PersonRepository.getByZip ;
 
@@ -31,9 +34,11 @@ public class SafetyNetAlertApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		logger.info("initializing SafetyNetAlertApplication toudoum");
-		Database db = new Database();
 
+		Database db = new Database();
 		db.init();
+		logger.info("initializing Database");
+
 	}
 }
 

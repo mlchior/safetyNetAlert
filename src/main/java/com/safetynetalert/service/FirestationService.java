@@ -110,7 +110,8 @@ moins) dans la zone desservie.**/
             for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
                 for (MedicalRecord medicalRecord : MedicalRecords) {
                     if (medicalRecord.getFirstName().equals(personCoverByFirestation.getFirstName()) && medicalRecord.getLastName().equals(personCoverByFirestation.getLastName())) {
-                        personCoverByFirestation.setBirthDate(medicalRecord.getBirthdate());
+                        personCoverByFirestation.setBirthDate(LocalDate.parse(medicalRecord.getBirthdate()));
+
                     }
                 }
             }

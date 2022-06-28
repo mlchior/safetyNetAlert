@@ -17,25 +17,6 @@ public class MedicalRecordRepository {
     private static List<String> allergies2 = new ArrayList<>();
 
 
-    public static void initMedicalRecordList() {
-        medication1.add("Aspirin");
-        medication1.add("Paracetamol");
-        medication1.add("Ibuprofen");
-
-        allergies1.add("Penicillin");
-        medication2.add("Aspirin");
-        medication2.add("Paracetamol");
-        medication2.add("Ibuprofen");
-        allergies2.add("Penicillin");
-        allergies2.add("Sulfa");
-
-        LocalDate date = LocalDate.of(1990, 1, 1);
-
-        medicalRecordList.add(new MedicalRecord("John", "Doe", date,medication1,allergies1));
-        medicalRecordList.add(new MedicalRecord("Didier", "maraux", date,medication2,allergies2));
-    }
-
-
     public List<MedicalRecord> findAll() {
         return medicalRecordList;
     }

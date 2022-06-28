@@ -63,17 +63,17 @@ public class Database {
             }
 
         }catch(ParseException e)
-            {e.printStackTrace();
+        {e.printStackTrace();
         }
-       /* for(int i =0; i<persons.size(); i++){
+        for(int i =0; i<persons.size(); i++){
             System.out.println(persons.get(i).getFirstName());
         }
         for(int i =0; i<firestations.size(); i++){
             System.out.println(firestations.get(i).getStation());
         }
-        */
+
         for(int i = 0; i< medicalrecords.size(); i++){
-            System.out.println(medicalrecords.get(i).getFirstName());
+            System.out.println(medicalrecords.get(i).getBirthdate());
         }
 
 

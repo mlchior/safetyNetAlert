@@ -10,11 +10,11 @@ import lombok.Data;
 public class MedicalRecord {
     private String firstName;
     private String lastName;
-    private LocalDate birthdate;
+    private String birthdate;
     private List<String> medications;
     private List<String> allergies;
 
-    public MedicalRecord(String firstName, String lastName, LocalDate birthDate, List<String> medications, List<String> allergies) {
+    public MedicalRecord(String firstName, String lastName, String birthDate, List<String> medications, List<String> allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthDate;
@@ -39,11 +39,11 @@ public class MedicalRecord {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
