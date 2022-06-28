@@ -7,7 +7,6 @@ import com.safetynetalert.model.Firestation;
 public interface IFirestationRepository {
 
 
-
 }
 
 

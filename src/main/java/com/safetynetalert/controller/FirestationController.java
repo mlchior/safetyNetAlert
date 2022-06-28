@@ -1,7 +1,6 @@
 package com.safetynetalert.controller;
 
-import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
-import com.safetynetalert.DTO.link1.StationInfo;
+import com.safetynetalert.DTO.link1.StationNumber;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.service.FirestationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class FirestationController {
    /****/
     //return List<fire>
     @GetMapping("/firestation/station/stationinfo")
-    public List<StationInfo> findStationInfo(@RequestParam int station) {
+    public List<StationNumber> findStationInfo(@RequestParam int station) {
         return firestationService.findStationInfo(station);
     }
     @GetMapping("/firestation/phonenumberbystation")

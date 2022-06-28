@@ -1,33 +1,28 @@
 package com.safetynetalert.repository;
-import com.safetynetalert.DTO.link1.StationInfo;
-import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
+import com.safetynetalert.model.Database;
 import com.safetynetalert.model.Firestation;
-import com.safetynetalert.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class FirestationRepository implements IFirestationRepository{
+public class FirestationRepository{
     private static ArrayList<Firestation> firestationList = new ArrayList<>();
+
+    @Autowired
+    private Database database;
+
 
     public static void initFirestation() {
 
-        Firestation firestation = new Firestation("21 jump street", 3);
-        firestationList.add(firestation);
-        firestation = new Firestation("Paris", 2);
-        firestationList.add(firestation);
-        firestationList.add(new Firestation("saint ouen", 4));
-        firestationList.add(new Firestation("melbourne", 5));
-        firestationList.add(new Firestation("montrouge", 8));
-        firestationList.add(new Firestation("paris", 1));
-        firestationList.add(new Firestation("london", 1));
+
     }
 
 
     public List<Firestation> getAllFirestation() {
-        return firestationList;
+        return database.getFirestations();
     }
 
 
@@ -37,14 +32,14 @@ public class FirestationRepository implements IFirestationRepository{
     }
 
     public void deleteFirestation(String adress) {
-        firestationList.removeIf(firestation -> firestation.getAdress().equals(adress));
+        firestationList.removeIf(firestation -> firestation.getAddress().equals(adress));
     }
 
 
     public Firestation updateFirestation(Firestation firestation) {
         for (Firestation newFirestation : firestationList) {
-            if (newFirestation.getAdress().equals(firestation.getAdress())) {
-                newFirestation.setAdress(firestation.getAdress());
+            if (newFirestation.getAddress().equals(firestation.getAddress())) {
+                newFirestation.setAddress(firestation.getAddress());
                 newFirestation.setStation(firestation.getStation());
                 return newFirestation;
             }
@@ -63,7 +58,7 @@ public class FirestationRepository implements IFirestationRepository{
 
     public Firestation getFirestationByAddress(String adress) {
         for (Firestation firestation : firestationList) {
-            if (firestation.getAdress().equals(adress)) {
+            if (firestation.getAddress().equals(adress)) {
                 return firestation;
             }
         }

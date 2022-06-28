@@ -1,12 +1,13 @@
 package com.safetynetalert.service;
 import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
-import com.safetynetalert.DTO.link1.StationInfo;
+import com.safetynetalert.DTO.link1.StationNumber;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.MedicalRecord;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordRepository;
 import com.safetynetalert.repository.PersonRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class FirestationService {
     @Autowired
@@ -85,15 +87,15 @@ moins) dans la zone desservie.**/
 
 
 
-    public List<StationInfo> findStationInfo(int station) {
-        List<StationInfo> stationInfosList = new ArrayList<>();
+    public List<StationNumber> findStationInfo(int station) {
+        List<StationNumber> stationInfosList = new ArrayList<>();
         List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
         List<Person> persons = personRepository.getAll();
         List<MedicalRecord> MedicalRecords = medicalRecordRepository.findAll();
         int numberOfAdult = 0;
         int numberOfChild = 0;
 
-        String adress = firestationRepository.getFirestationByAdress(station).getAdress().toLowerCase();
+        String adress = firestationRepository.getFirestationByAdress(station).getAddress().toLowerCase();
         for (Person person : persons) {
             if (person.getAddress().toLowerCase().equals(adress)) {
                 PersonCoverByFirestation personCoverByStation = new PersonCoverByFirestation();
@@ -108,7 +110,7 @@ moins) dans la zone desservie.**/
             for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
                 for (MedicalRecord medicalRecord : MedicalRecords) {
                     if (medicalRecord.getFirstName().equals(personCoverByFirestation.getFirstName()) && medicalRecord.getLastName().equals(personCoverByFirestation.getLastName())) {
-                        personCoverByFirestation.setBirthDate(medicalRecord.getBirthDate());
+                        personCoverByFirestation.setBirthDate(medicalRecord.getBirthdate());
                     }
                 }
             }
@@ -132,7 +134,7 @@ moins) dans la zone desservie.**/
 
         }
         //create new StationInfo  and add it to the list
-        StationInfo stationInfo = new StationInfo(personCoverByFirestationList, numberOfAdult, numberOfChild);
+        StationNumber stationInfo = new StationNumber(personCoverByFirestationList, numberOfAdult, numberOfChild);
         stationInfo.setNumberOfAdult(numberOfAdult);
         stationInfo.setNumberOfChild(numberOfChild);
         stationInfosList.add(stationInfo);
@@ -143,7 +145,7 @@ moins) dans la zone desservie.**/
     public List<String> findPhoneAlert(int station) {
     List<String> phoneAlertList = new ArrayList<>();
     List<Person> persons = personRepository.getAll();
-    String adress = firestationRepository.getFirestationByAdress(station).getAdress().toLowerCase();
+    String adress = firestationRepository.getFirestationByAdress(station).getAddress().toLowerCase();
     for (Person person : persons) {
         if (person.getAddress().toLowerCase().equals(adress)) {
             phoneAlertList.add(person.getPhone());

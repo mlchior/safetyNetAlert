@@ -4,13 +4,12 @@ import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
 
 import java.util.List;
 
-public class StationInfo {
+public class StationNumber {
     private List<PersonCoverByFirestation> ListPersonCoverByStation;
     private int numberOfAdult;
     private int numberOfChild;
 
-
-    public StationInfo(List<PersonCoverByFirestation> listPersonCoverByStation, int numberOfAdult, int numberOfChild) {
+    public StationNumber(List<PersonCoverByFirestation> listPersonCoverByStation, int numberOfAdult, int numberOfChild) {
         this.ListPersonCoverByStation = listPersonCoverByStation;
         this.numberOfAdult = numberOfAdult;
         this.numberOfChild = numberOfChild;

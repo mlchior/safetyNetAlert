@@ -74,5 +74,5 @@ public class PersonCoverByFirestation {
     public int getAge() {
         return age;
     }
-   /****/
+
 }

@@ -8,31 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PersonRepository {
+public class PersonRepository implements IPersonRepository{
     private static ArrayList<Person> personsList = new ArrayList<>();
     private List<Person> persons;
     @Autowired
     private Database database;
-
-
-    public static void initPersonList() {
-        personsList.add(new Person("John", "Doe", "Melbourne", "Melbourne", "55555", "0634437847636", "boulou@gmail.com"));
-        personsList.add(new Person("John", "Smith", "123 Main St.", "montrouge", "93400", "0634432234", "bilou@gmail.com"));
-        personsList.add(new Person("andré", "tutu", "clef des champs", "paris", "75017", "0634437847636", "andre.tutu@gmail.com"));
-        personsList.add(new Person("Yacine", "PE", "21 jump street", "Melbourne","55555", "0134567899","yacine@pole-emploi.fr"));
-        personsList.add(new Person("Laurence", "PE", "21 jump street", "Melbourne","55555", "0134567899","laurence@pe.fr"));
-        personsList.add(new Person("Didier","maraux","Melbourne","Melbourne","75017","0123456789","dier.maraux@gmail.com"));
-        personsList.add(new Person("Didierporeferji","marferferfaux","paris","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
-        personsList.add(new Person("Didierpoferferferfreferji","marferfezrfzerfferfaux","london","paris","75017","0123456789","dier.maraurfefreferx@gmail.com"));
-
-    }
     // add persons List of Database in the ArrayList
 
-
-
-
-
-    //trouver toutes les personnes
+    @Override
     public  List<Person> getAll() {
         return database.getPersons();
     }

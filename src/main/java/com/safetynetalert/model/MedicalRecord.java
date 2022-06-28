@@ -1,8 +1,6 @@
 package com.safetynetalert.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
@@ -12,17 +10,18 @@ import lombok.Data;
 public class MedicalRecord {
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
+    private LocalDate birthdate;
     private List<String> medications;
     private List<String> allergies;
 
     public MedicalRecord(String firstName, String lastName, LocalDate birthDate, List<String> medications, List<String> allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
+        this.birthdate = birthDate;
         this.medications = medications;
         this.allergies = allergies;
     }
+    public MedicalRecord(){}
 
     public String getFirstName() {
         return firstName;
@@ -40,12 +39,12 @@ public class MedicalRecord {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 
     public List<String> getMedications() {

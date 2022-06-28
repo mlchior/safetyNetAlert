@@ -35,3 +35,10 @@ public class AgeOfPersons {
         this.age = age;
     }
 }
+// recuperer la liste de toute les personne qui habite a cette adress
+// parcours toute les personnes qui sont dans cette liste si <18 ou =
+// si une personne rempli cette condition je peux arreter le parcours et return ma liste si je ne trouve personne je renvoi une liste vide
+//
+
+//
+

@@ -1,7 +1,6 @@
 package com.safetynetalert;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import com.safetynetalert.model.Database;
 import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.MedicalRecordRepository;
@@ -10,6 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 import static com.safetynetalert.repository.PersonRepository.getByZip ;
@@ -20,20 +23,16 @@ import static com.safetynetalert.repository.PersonRepository.getByZip ;
 @SpringBootApplication
 public class SafetyNetAlertApplication implements CommandLineRunner {
 
-
+	private static final Logger logger = LoggerFactory.getLogger("SafetyNetAlertApplication");
 	public static void main(String[] args) {
 		SpringApplication.run(SafetyNetAlertApplication.class, args);
 	}
 	@Override
 	public void run(String... args) throws Exception {
 
-		FirestationRepository.initFirestation();
-		PersonRepository.initPersonList();
-		MedicalRecordRepository.initMedicalRecordList();
+		logger.info("initializing SafetyNetAlertApplication toudoum");
 		Database db = new Database();
-		FirestationRepository.initFirestation();
-		PersonRepository.initPersonList();
-		MedicalRecordRepository.initMedicalRecordList();
+
 		db.init();
 	}
 }

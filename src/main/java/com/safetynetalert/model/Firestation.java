@@ -2,26 +2,25 @@ package com.safetynetalert.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-
 @Data
 public class Firestation {
 
-    private String adress;
+    private String address;
     private int station;
 
 
     public Firestation(String adress, int station) {
-        this.adress = adress;
+        this.address = adress;
         this.station = station;
     }
+    public Firestation(){}
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getStation() {

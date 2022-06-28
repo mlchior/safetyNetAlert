@@ -2,14 +2,11 @@ package com.safetynetalert.repository;
 
 
 import com.safetynetalert.model.MedicalRecord;
-import com.safetynetalert.service.MedicalRecordService;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Repository
 public class MedicalRecordRepository {
@@ -61,7 +58,7 @@ public class MedicalRecordRepository {
     public MedicalRecord updateMedicalRecord(MedicalRecord updateMedicalRecord) {
         for (MedicalRecord medicalRecord : medicalRecordList) {
             if (medicalRecord.getFirstName().equals(updateMedicalRecord.getFirstName()) && medicalRecord.getLastName().equals(updateMedicalRecord.getLastName())) {
-                medicalRecord.setBirthDate(updateMedicalRecord.getBirthDate());
+                medicalRecord.setBirthdate(updateMedicalRecord.getBirthdate());
                 medicalRecord.setMedications(updateMedicalRecord.getMedications());
                 medicalRecord.setAllergies(updateMedicalRecord.getAllergies());
                 break;

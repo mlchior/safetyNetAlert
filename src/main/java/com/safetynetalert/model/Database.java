@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -22,7 +20,7 @@ import java.util.ListIterator;
 public class Database {
     private static List<Person> persons;
     private static List<Firestation> firestations;
-    private static List<MedicalRecord>      medicalRecords;
+    private static List<MedicalRecord> medicalrecords;
 
 
     private InputStreamReader getInputStreamReader() throws IOException{
@@ -32,6 +30,8 @@ public class Database {
     }
 
     // @PostConstruct to initialize the static variable persons and map the json file data.json to the list persons.
+
+    // 3 fonction init pour chaque class.import init va appeler initPerson initFirestation et initMedicat
     @PostConstruct
     public void init() throws IOException{
 
@@ -39,24 +39,45 @@ public class Database {
         ObjectMapper mapper = new ObjectMapper();
         persons = new ArrayList<>();
         firestations = new ArrayList<>();
-        medicalRecords = new ArrayList<>();
+        medicalrecords = new ArrayList<>();
         InputStreamReader inputStreamReader = getInputStreamReader();
 
 
         try {
-
             JSONObject object = (JSONObject) parser.parse(inputStreamReader);
             JSONArray jsonArray = (JSONArray) object.get("persons");
+            JSONArray jsonArray1 = (JSONArray) object.get("firestations");
+            JSONArray jsonArray2 = (JSONArray) object.get("medicalrecords");
             ListIterator<JSONObject> listPersons = jsonArray.listIterator();
+            ListIterator<JSONObject> listFirestations = jsonArray1.listIterator();
+            ListIterator<JSONObject> listMedicalRecords = jsonArray2.listIterator();
+
             while(listPersons.hasNext()){
                 persons.add(mapper.readValue(listPersons.next().toString(), Person.class));
             }
+            while (listFirestations.hasNext()){
+                firestations.add(mapper.readValue(listFirestations.next().toString(),Firestation.class));
+            }
+            while (listMedicalRecords.hasNext()) {
+                medicalrecords.add(mapper.readValue(listMedicalRecords.next().toString(), MedicalRecord.class));
+            }
+
         }catch(ParseException e)
             {e.printStackTrace();
         }
-        for(int i =0; i<persons.size(); i++){
+       /* for(int i =0; i<persons.size(); i++){
             System.out.println(persons.get(i).getFirstName());
         }
+        for(int i =0; i<firestations.size(); i++){
+            System.out.println(firestations.get(i).getStation());
+        }
+        */
+        for(int i = 0; i< medicalrecords.size(); i++){
+            System.out.println(medicalrecords.get(i).getFirstName());
+        }
+
+
+
 
     }
 
@@ -68,9 +89,7 @@ public class Database {
         return firestations;
     }
 
-    public static List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
-    }
+
 
     public static void setPersons(List<Person> persons) {
         Database.persons = persons;
@@ -80,7 +99,5 @@ public class Database {
         Database.firestations = firestations;
     }
 
-    public static void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        Database.medicalRecords = medicalRecords;
-    }
+
 }
