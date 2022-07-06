@@ -65,18 +65,8 @@ public class Database {
         }catch(ParseException e)
         {e.printStackTrace();
         }
-        for(int i =0; i<persons.size(); i++){
-            System.out.println(persons.get(i).getFirstName());
-        }
-        for(int i =0; i<firestations.size(); i++){
-            System.out.println(firestations.get(i).getStation());
-        }
 
-        for(int i = 0; i< medicalrecords.size(); i++){
-            System.out.println(medicalrecords.get(i).getBirthdate());
-        }
-
-
+// logger error
 
 
     }
@@ -89,6 +79,9 @@ public class Database {
         return firestations;
     }
 
+    public static List<MedicalRecord> getMedicalRecords() {
+        return medicalrecords;
+    }
 
 
     public static void setPersons(List<Person> persons) {
@@ -99,5 +92,8 @@ public class Database {
         Database.firestations = firestations;
     }
 
+    public static void setMedicalrecords(List<MedicalRecord> medicalrecords) {
+        Database.medicalrecords = medicalrecords;
+    }
 
 }

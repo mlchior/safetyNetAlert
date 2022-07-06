@@ -1,7 +1,9 @@
 package com.safetynetalert.repository;
 
 
+import com.safetynetalert.model.Database;
 import com.safetynetalert.model.MedicalRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -11,14 +13,12 @@ import java.util.List;
 @Repository
 public class MedicalRecordRepository {
     private static ArrayList<MedicalRecord> medicalRecordList = new ArrayList<>();
-    private static ArrayList<String> medication1 = new ArrayList<>();
-    private static ArrayList<String> allergies1 = new ArrayList<>();
-    private static List<String> medication2 = new ArrayList<>();
-    private static List<String> allergies2 = new ArrayList<>();
-
+    @Autowired
+    private Database database;
 
     public List<MedicalRecord> findAll() {
-        return medicalRecordList;
+
+        return database.getMedicalRecords();
     }
 
     public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord) {
