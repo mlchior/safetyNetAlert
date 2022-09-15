@@ -5,22 +5,22 @@ import com.safetynetalert.model.Firestation;
 import java.util.List;
 
 public class Fire {
-    private List<PersonByAdress> personByAdress;
+    private List<PersonByAddress> personByAdress;
     private Firestation firestation;
 
     public Fire() {
     }
 
-    public Fire(List<PersonByAdress> personByAdress, Firestation firestation) {
+    public Fire(List<PersonByAddress> personByAdress, Firestation firestation) {
         this.personByAdress = personByAdress;
         this.firestation = firestation;
     }
 
-    public List<PersonByAdress> getPersonByAdress() {
+    public List<PersonByAddress> getPersonByAdress() {
         return personByAdress;
     }
 
-    public void setPersonByAdress(List<PersonByAdress> personByAdress) {
+    public void setPersonByAdress(List<PersonByAddress> personByAdress) {
         this.personByAdress = personByAdress;
     }
 

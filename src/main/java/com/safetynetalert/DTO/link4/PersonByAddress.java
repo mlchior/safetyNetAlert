@@ -2,14 +2,14 @@ package com.safetynetalert.DTO.link4;
 
 import java.util.List;
 
-public class PersonByAdress {
+public class PersonByAddress {
     private String lastName;
     private String phone;
     private int age;
     private List<String> medications;
     private List<String> allergies;
 
-    public PersonByAdress(String lastName, String phone, int age, List<String> medications, List<String> allergies) {
+    public PersonByAddress(String lastName, String phone, int age, List<String> medications, List<String> allergies) {
         this.lastName = lastName;
         this.phone = phone;
         this.age = age;

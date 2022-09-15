@@ -2,10 +2,11 @@ package com.safetynetalert.controller;
 
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonService;
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.tinylog.Logger;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -14,37 +15,66 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("/person")
-    public List<Person> getAllPerson(){
+    public List<Person> getAllPerson() {
+        List<Person> p = personService.findAllPerson();
+        if (p.isEmpty()) {
+            Logger.error("getAllPerson FAILED");
+        } else {
+            Logger.info("getAllPerson SUCCESS");
+        }
         return personService.findAllPerson();
     }
 
     @PostMapping("/person")
-    public Person addPerson(@RequestBody Person person){
+    public Person addPerson(@RequestBody Person person) {
+        if (personService.addPerson(person) == null) {
+            Logger.error("addPerson FAILED");
+        } else {
+            Logger.info("addPerson SUCCESS");
+        }
         return personService.addPerson(person);
     }
-    @DeleteMapping("/person")
-    public Person deletePerson(@RequestParam String firstName, @RequestParam String lastName){
-        return personService.deletePerson(firstName, lastName);
-    }
-    @PutMapping("/person")
-    public Person updatePerson(@RequestBody Person person){
-        return personService.updatePerson(person);
 
+    @PutMapping("/person")
+    public Person updatePerson(@RequestBody Person person) {
+        if (personService.updatePerson(person) == null) {
+            Logger.error("updatePerson FAILED");
+        } else {
+            Logger.info("updatePerson SUCCESS");
+        }
+        return personService.updatePerson(person);
+    }
+
+    @DeleteMapping("/person")
+    public Person deletePerson(@RequestParam String firstName, @RequestParam String lastName) {
+        if (personService.deletePerson(firstName, lastName) == null) {
+            Logger.error("deletePerson FAILED");
+        } else {
+            Logger.info("deletePerson SUCCESS");
+        }
+        return personService.deletePerson(firstName, lastName);
     }
 
     @GetMapping("/communityEmail")
-    public List<String> getAllEmailByCity(@RequestParam String city){
-        return personService.getAllEmailByCity(city);
+    // get all the emails by city
+    public List<String> getCommunityEmail(@RequestParam String city) {
+        if (personService.getCommunityEmail(city).isEmpty()) {
+            Logger.error("getCommunityEmail FAILED");
+        } else {
+            Logger.info("getCommunityEmail SUCCESS");
+        }
+        return personService.getCommunityEmail(city);
     }
-
-
     @GetMapping("/personInfo")
-    public Person getPersonInfo(@RequestParam String firstName, @RequestParam String lastName){
+    public Collection<Object> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
+        if (personService.getPersonInfo(firstName, lastName).isEmpty()) {
+            Logger.error("getPersonInfo FAILED");
+        } else {
+            Logger.info("getPersonInfo SUCCESS");
+        }
         return personService.getPersonInfo(firstName, lastName);
     }
-
-
-
 }
+
 
 

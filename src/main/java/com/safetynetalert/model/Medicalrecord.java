@@ -1,27 +1,26 @@
 package com.safetynetalert.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
 
 
 @Data
-public class MedicalRecord {
+public class Medicalrecord {
     private String firstName;
     private String lastName;
     private String birthdate;
     private List<String> medications;
     private List<String> allergies;
 
-    public MedicalRecord(String firstName, String lastName, String birthDate, List<String> medications, List<String> allergies) {
+    public Medicalrecord(String firstName, String lastName, String birthDate, List<String> medications, List<String> allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthDate;
         this.medications = medications;
         this.allergies = allergies;
     }
-    public MedicalRecord(){}
+    public Medicalrecord(){}
 
     public String getFirstName() {
         return firstName;

@@ -15,16 +15,17 @@ public class SafetyNetAlertApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(SafetyNetAlertApplication.class, args);
 	}
+
 	@Override
 	public void run(String... args) throws Exception {
 	Logger.info("Application started");
-	Logger.trace("Application started");
-	Logger.debug("Application started");
+
+	Logger.info("");
 
 
 
-		Database db = new Database();
-		db.init();
+
+
 
 
 	}

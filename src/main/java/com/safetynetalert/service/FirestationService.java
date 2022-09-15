@@ -2,228 +2,149 @@ package com.safetynetalert.service;
 import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
 import com.safetynetalert.DTO.link1.StationNumber;
 import com.safetynetalert.model.Firestation;
-import com.safetynetalert.model.MedicalRecord;
+import com.safetynetalert.model.Medicalrecord;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.FirestationRepository;
-import com.safetynetalert.repository.MedicalRecordRepository;
-import com.safetynetalert.repository.PersonRepository;
-import lombok.extern.slf4j.Slf4j;
+import com.safetynetalert.repository.IFirestationRepository;
+import com.safetynetalert.repository.IMedicalrecordRepository;
+import com.safetynetalert.repository.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tinylog.Logger;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-@Slf4j
+
+
 @Service
 public class FirestationService {
     @Autowired
-    private FirestationRepository firestationRepository;
+    private IFirestationRepository iFirestationRepository;
     @Autowired
-    private PersonRepository personRepository;
+    private IPersonRepository iPersonRepository;
     @Autowired
-    private MedicalRecordRepository medicalRecordRepository;
-
+    private IMedicalrecordRepository iMedicalrecordRepository;
 
     public List<Firestation> findAllFirestation() {
-        return firestationRepository.getAllFirestation();
+        Logger.info("findAllFirestation SUCCESS");
+        return iFirestationRepository.getAll();
     }
-
     public Firestation addFirestation(Firestation firestation) {
-        return firestationRepository.addFirestation(firestation);
+        Logger.info("addFirestation SUCCESS" + firestation);
+        return iFirestationRepository.addFirestation(firestation);
     }
-    public void deleteFirestation(String adress) {
-        firestationRepository.deleteFirestation(adress);
-    }
-
     public Firestation updateFirestation(Firestation firestation) {
-        return firestationRepository.updateFirestation(firestation);
+        Logger.info("updateFirestation SUCCESS" + firestation);
+        return iFirestationRepository.updateFirestation(firestation);
     }
-
-    /*public List<Person> findPersonByStation(int station) {
-        List<Person> result = new ArrayList<>();
-
-        for(Person person : personRepository.getAll()){
-            if(person.getAdress().equals(firestationRepository.getFirestationByAdress(station).getAdress())){
-                result.add(person);
-
-            }
-        }
-        return result;
-
-        }*/
-
-    public Firestation findFirestationByAddress(String adress){
-        return (firestationRepository.getFirestationByAddress(adress));
+    public Firestation deleteFirestation(String address) {
+        Logger.info("deleteFirestation SUCCESS" + address);
+        return iFirestationRepository.deleteFirestation(address);
     }
-
-
-
-
-   /* public List<PersonCoverByFirestation> findPersonsByStation(int station) {
-        List<PersonCoverByFirestation> result = new ArrayList<>();
-        List<Person> persons = personRepository.getAll();
-        for (Person person : persons) {
-            if (person.getAdress().equals(firestationRepository.getFirestationByAdress(station).getAdress())) {
-                PersonCoverByFirestation personCoverByStation = new PersonCoverByFirestation();
-                personCoverByStation.setFirstName(person.getFirstName());
-                personCoverByStation.setLastName(person.getLastName());
-                personCoverByStation.setAddress(person.getAdress());
-                personCoverByStation.setPhone(person.getPhone());
-                result.add(personCoverByStation);
-            }
-        }
-        System.out.println(result);
-        return result;
-
-    }*/
-    /*retourner une liste des personnes couvertes par la caserne de pompiers correspondante.
-Donc, si le numéro de station = 1, elle doit renvoyer les habitants couverts par la station numéro 1. La liste
-doit inclure les informations spécifiques suivantes : prénom, nom, adresse, numéro de téléphone. De plus,
-elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants (tout individu âgé de 18 ans ou
-moins) dans la zone desservie.**/
-
-
 
     public List<StationNumber> findStationInfo(int station) {
-        List<StationNumber> stationInfosList = new ArrayList<>();
+        List<StationNumber> stationInfoList = new ArrayList<>();
         List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
-        List<Person> persons = personRepository.getAll();
-        List<MedicalRecord> MedicalRecords = medicalRecordRepository.findAll();
+        List<Firestation> firestationList = findAllFirestationByStation(station);
+        List<Person> persons = iPersonRepository.getAll();
+        List<Medicalrecord> Medicalrecords = iMedicalrecordRepository.getAll();
         int numberOfAdult = 0;
         int numberOfChild = 0;
 
-        String adress = firestationRepository.getFirestationByAdress(station).getAddress().toLowerCase();
         for (Person person : persons) {
-            if (person.getAddress().toLowerCase().equals(adress)) {
-                PersonCoverByFirestation personCoverByStation = new PersonCoverByFirestation();
-                personCoverByStation.setFirstName(person.getFirstName());
-                personCoverByStation.setLastName(person.getLastName());
-                personCoverByStation.setAddress(person.getAddress());
-                personCoverByStation.setPhone(person.getPhone());
-                personCoverByFirestationList.add(personCoverByStation);
+            for(Firestation firestation : firestationList){
+                if (person.getAddress().toLowerCase().equals(firestation.getAddress().toLowerCase())) {
+                    PersonCoverByFirestation personCoverByFirestation = new PersonCoverByFirestation();
+                    personCoverByFirestation.setFirstName(person.getFirstName());
+                    personCoverByFirestation.setLastName(person.getLastName());
+                    personCoverByFirestation.setAddress(person.getAddress());
+                    personCoverByFirestation.setPhone(person.getPhone());
+                    personCoverByFirestationList.add(personCoverByFirestation);
+            }}
 
-            }
-            //findMedicalRecordByFirstNameAndLastName of personCoverByFirestationList and return all birthDate
-            for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-                for (MedicalRecord medicalRecord : MedicalRecords) {
-                    if (medicalRecord.getFirstName().equals(personCoverByFirestation.getFirstName()) && medicalRecord.getLastName().equals(personCoverByFirestation.getLastName())) {
-                        personCoverByFirestation.setBirthDate(LocalDate.parse(medicalRecord.getBirthdate()));
-
-                    }
+        }
+        for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
+            for (Medicalrecord medicalrecord : Medicalrecords) {
+                if (medicalrecord.getFirstName().equals(personCoverByFirestation.getFirstName()) && medicalrecord.getLastName().equals(personCoverByFirestation.getLastName())) {
+                    personCoverByFirestation.setBirthDate(medicalrecord.getBirthdate());
                 }
             }
         }
-        //Calculate age of each person and add it to the list
         for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-            LocalDate birth = personCoverByFirestation.getBirthDate();
-            LocalDate now = LocalDate.now();
-            Period period = Period.between(birth, now);
-            personCoverByFirestation.setAge(period.getYears());
+            Date date = null;
+            Date date2 = null;
+            date2 = new Date();
+
+
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            try {
+               date = dateFormat.parse(personCoverByFirestation.getBirthDate());
+               date2 = dateFormat.parse(dateFormat.format(date2));
+
+
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            long time = date2.getTime() - date.getTime();
+            // convertir le temps en année
+            int years = (int) (time / (1000 * 60 * 60 * 24 * 365));
+
+            personCoverByFirestation.setAge(years);
+
         }
-
-
-
         for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
             if (personCoverByFirestation.getAge() >= 18) {
                 numberOfAdult++;
-            }else{
-                        numberOfChild++;
+            } else {
+                numberOfChild++;
             }
-
         }
-        //create new StationInfo  and add it to the list
         StationNumber stationInfo = new StationNumber(personCoverByFirestationList, numberOfAdult, numberOfChild);
         stationInfo.setNumberOfAdult(numberOfAdult);
         stationInfo.setNumberOfChild(numberOfChild);
-        stationInfosList.add(stationInfo);
-        return stationInfosList;
+        stationInfoList.add(stationInfo);
+        return stationInfoList;
+
     }
-//Cette url doit retourner une liste des numéros de téléphone des résidents desservis par la caserne de
-//pompiers. Nous l'utiliserons pour envoyer des messages texte d'urgence à des foyers spécifiques.
+
+
+
+
     public List<String> findPhoneAlert(int station) {
-    List<String> phoneAlertList = new ArrayList<>();
-    List<Person> persons = personRepository.getAll();
-    String adress = firestationRepository.getFirestationByAdress(station).getAddress().toLowerCase();
-    for (Person person : persons) {
-        if (person.getAddress().toLowerCase().equals(adress)) {
-            phoneAlertList.add(person.getPhone());
-        }
-    }
-    return phoneAlertList;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-   /* public List<PersonInfo> findPersonsByStation(int station) {
-        List<Person> personList = new ArrayList<>();
-        List<PersonInfo> personInfoList = new ArrayList<>();
-
-        String adressStation = firestationRepository.getFirestationByAdress(station).getAdress();
-
-        for(Person person : personList){
-
-            PersonInfo personInfo = new PersonInfo(person.getLastName(), person.getAdress(),person.getAge(),person.getEmail());
-
-
-          MedicalRecord medicalRecord = medicalRecordService.getOneMedicalRecord(person.getFirstName(),person.getLastName());
-             // pour chaque medicalRecord je doit recuperer la date de naissance pour calculer l'age
-            //cette age je le stock dans une variable
-            // creer objet personInfo avec tous le sinformation recuperer dans une variable avant
-            // ajouter a personInfoList
-            //if personList.lastname and surname == lastandsurname de MedicalRecordReposo findOneMedicalRecord
-
-        }
-        for(Person person : personRepository.getAll()){
-            if(person.getAdress().equals(adressStation)){
-                personList.add(person);
+        List<String> phoneAlertList = new ArrayList<>();
+        List<Person> persons = iPersonRepository.getAll();
+        String address = iFirestationRepository.getFirestationByStation(station).getAddress();
+        for (Person person : persons) {
+            if (person.getAddress().toLowerCase().equals(address.toLowerCase())) {
+                phoneAlertList.add(person.getPhone());
             }
         }
-        return personInfoList;
+        return phoneAlertList;
+    }
 
-    }*/
+    public List<Firestation> findAllFirestationByStation(int station) {
+        // forEach firestations of the list, if the station is the same as the station we want, add it to the list
+        List<Firestation> firestations = iFirestationRepository.getAll();
+        List<Firestation> firestationsByStation = new ArrayList<>();
+        for (Firestation firestation : firestations) {
+            if (firestation.getStation() == station) {
+                firestationsByStation.add(firestation);
+            }
 
+        }
 
-/*
-    newliststation
-    newListgens;
-
-    je recoi en paramettre une station;
-    ca renvoi Listadress de cette station;
-    pour chaque une des adress de la liststation;
-    jajoute a ma liste gens les gens habitant a chacune de ces adress*/
-
-    /**LINK 2*/
-
-
-
+        return firestationsByStation;
+    }
 
 
 
 
 
-
-
-
-
-
-
-
-  /*  public Firestation saveFirestation(Firestation firestation) {
-        Firestation savedFirestation = firestationRepository.saveFirestation(firestation);
-
-        return savedFirestation;
-    }**/
-
-
+}

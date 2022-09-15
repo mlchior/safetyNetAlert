@@ -1,34 +1,36 @@
 package com.safetynetalert.service;
 
-import com.safetynetalert.model.MedicalRecord;
-import com.safetynetalert.repository.MedicalRecordRepository;
+import com.safetynetalert.model.Medicalrecord;
+import com.safetynetalert.repository.IMedicalrecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tinylog.Logger;
+
+import java.util.List;
 
 @Service
 public class MedicalRecordService {
     @Autowired
-    private MedicalRecordRepository medicalRecordRepository;
+    private IMedicalrecordRepository iMedicalRecordRepository;
 
-
-    public Iterable<MedicalRecord> getAllMedicalRecords() {
-        return medicalRecordRepository.findAll();
+    public List<Medicalrecord> findAllMedicalrecord() {
+        Logger.info("findAllMedicalrecord SUCCESS");
+        return iMedicalRecordRepository.getAll();
     }
 
-    public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord) {
-        return medicalRecordRepository.addMedicalRecord(medicalRecord);
-    }
-
-    public void deleteMedicalRecord(String firstName, String lastName) {
-        medicalRecordRepository.deleteMedicalRecord(firstName, lastName);
-    }
-    /*public getOneMedicalRecord(String firstName, String lastName){
-        medicalRecordRepository.findOneMedicalRecord(firstName,lastName);
-    }*/
-
-    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
-        return medicalRecordRepository.updateMedicalRecord(medicalRecord);
+    public Medicalrecord addMedicalRecord(Medicalrecord medicalrecord) {
+        Logger.info("addMedicalRecord SUCCESS" + medicalrecord);
+        return iMedicalRecordRepository.addMedicalRecord(medicalrecord);
     }
 
 
+    public Medicalrecord updateMedicalRecord(Medicalrecord medicalrecord) {
+        Logger.info("updateMedicalRecord SUCCESS" + medicalrecord);
+        return iMedicalRecordRepository.updateMedicalRecord(medicalrecord);
+    }
+
+    public Medicalrecord deleteMedicalRecord(String firstName, String lastName) {
+        Logger.info("deleteMedicalRecord SUCCESS" + firstName + lastName);
+        return iMedicalRecordRepository.deleteMedicalRecord(firstName, lastName);
+    }
 }

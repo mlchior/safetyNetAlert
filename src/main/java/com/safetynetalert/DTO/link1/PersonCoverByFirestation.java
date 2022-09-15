@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 public class PersonCoverByFirestation {
     private String firstName;
@@ -12,7 +13,7 @@ public class PersonCoverByFirestation {
     private String address;
     private String phone;
     @JsonIgnore
-    private LocalDate birthDate;
+    private String birthDate;
     @JsonIgnore
     private int age;
 
@@ -59,11 +60,11 @@ public class PersonCoverByFirestation {
         this.phone = phone;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 

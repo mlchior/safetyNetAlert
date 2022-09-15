@@ -9,7 +9,7 @@ public class StationNumber {
     private int numberOfAdult;
     private int numberOfChild;
 
-    public StationNumber(List<PersonCoverByFirestation> listPersonCoverByStation, int numberOfAdult, int numberOfChild) {
+    public StationNumber (List<PersonCoverByFirestation> listPersonCoverByStation, int numberOfAdult, int numberOfChild) {
         this.ListPersonCoverByStation = listPersonCoverByStation;
         this.numberOfAdult = numberOfAdult;
         this.numberOfChild = numberOfChild;
