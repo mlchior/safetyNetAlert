@@ -92,9 +92,9 @@ public class FirestationService {
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-            long time = date2.getTime() - date.getTime();
+
             // convertir le temps en année
-            int years = (int) (time / (1000 * 60 * 60 * 24 * 365));
+            int years = date2.getYear() - date.getYear();
 
             personCoverByFirestation.setAge(years);
 
