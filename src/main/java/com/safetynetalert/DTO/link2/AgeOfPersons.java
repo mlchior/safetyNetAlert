@@ -3,11 +3,15 @@ package com.safetynetalert.DTO.link2;
 public class AgeOfPersons {
     private String firstName;
     private String lastName;
+
+    private  String birthDate;
     private int age;
 
-    public AgeOfPersons(String firstName, String lastName, int age) {
+
+    public AgeOfPersons() {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthDate = birthDate;
         this.age = age;
     }
 
@@ -29,6 +33,14 @@ public class AgeOfPersons {
 
     public int getAge() {
         return age;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public void setAge(int age) {

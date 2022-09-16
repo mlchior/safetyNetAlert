@@ -1,5 +1,6 @@
 package com.safetynetalert.controller;
 
+import com.safetynetalert.DTO.link2.ChildAlert;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,15 @@ public class PersonController {
             Logger.info("getPersonInfo SUCCESS");
         }
         return personService.getPersonInfo(firstName, lastName);
+    }
+    @GetMapping("/childAlert")
+    public List<ChildAlert> getChildAlert(@RequestParam String address) {
+        if (personService.getChildAlert(address).isEmpty()) {
+            Logger.error("getChildAlert FAILED");
+        } else {
+            Logger.info("getChildAlert SUCCESS");
+        }
+        return personService.getChildAlert(address);
     }
 }
 

@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,7 @@ public class FirestationService {
         Logger.info("deleteFirestation SUCCESS" + address);
         return iFirestationRepository.deleteFirestation(address);
     }
-
+    /*----------------------------------------**/
     public List<StationNumber> findStationInfo(int station) {
         List<StationNumber> stationInfoList = new ArrayList<>();
         List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
@@ -78,7 +79,7 @@ public class FirestationService {
             }
         }
         for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-            Date date = null;
+           /* Date date = null;
             Date date2 = null;
             date2 = new Date();
 
@@ -95,9 +96,11 @@ public class FirestationService {
 
             // convertir le temps en année
             int years = date2.getYear() - date.getYear();
-
+**/
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            int years = Period.between(LocalDate.parse(personCoverByFirestation.getBirthDate(), formatter), LocalDate.now()).getYears();
             personCoverByFirestation.setAge(years);
-
+            System.out.println(personCoverByFirestation.getAge());
         }
         for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
             if (personCoverByFirestation.getAge() >= 18) {

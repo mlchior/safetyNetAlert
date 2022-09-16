@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Person {
+
     private String firstName;
     private String lastName;
     private String address;
@@ -25,6 +26,7 @@ public class Person {
         this.zip = zip;
         this.phone = phone;
         this.email = email;
+
 
 
 
