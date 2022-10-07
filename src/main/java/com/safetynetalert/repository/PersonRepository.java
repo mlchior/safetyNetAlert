@@ -88,7 +88,16 @@ public class PersonRepository implements IPersonRepository{
         return null;
     }
 
-
+    @Override
+    public List<Person> getPersonsByAddress(String address) {
+        List<Person> result = new ArrayList<>();
+        for (Person person : persons) {
+            if (person.getAddress().equalsIgnoreCase(address)) {
+                result.add(person);
+            }
+        }
+        return result;
+    }
 }
 
 

@@ -9,8 +9,10 @@ public class PersonByAddress {
     private List<String> medications;
     private List<String> allergies;
 
+
     public PersonByAddress(String lastName, String phone, int age, List<String> medications, List<String> allergies) {
         this.lastName = lastName;
+
         this.phone = phone;
         this.age = age;
         this.medications = medications;

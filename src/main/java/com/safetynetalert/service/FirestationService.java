@@ -1,25 +1,22 @@
 package com.safetynetalert.service;
 import com.safetynetalert.DTO.link1.PersonCoverByFirestation;
 import com.safetynetalert.DTO.link1.StationNumber;
+import com.safetynetalert.DTO.link3.PhoneAlert;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.Medicalrecord;
 import com.safetynetalert.model.Person;
-import com.safetynetalert.repository.FirestationRepository;
 import com.safetynetalert.repository.IFirestationRepository;
 import com.safetynetalert.repository.IMedicalrecordRepository;
 import com.safetynetalert.repository.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.tinylog.Logger;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -32,6 +29,8 @@ public class FirestationService {
     private IPersonRepository iPersonRepository;
     @Autowired
     private IMedicalrecordRepository iMedicalrecordRepository;
+
+
 
     public List<Firestation> findAllFirestation() {
         Logger.info("findAllFirestation SUCCESS");
@@ -120,17 +119,6 @@ public class FirestationService {
 
 
 
-    public List<String> findPhoneAlert(int station) {
-        List<String> phoneAlertList = new ArrayList<>();
-        List<Person> persons = iPersonRepository.getAll();
-        String address = iFirestationRepository.getFirestationByStation(station).getAddress();
-        for (Person person : persons) {
-            if (person.getAddress().toLowerCase().equals(address.toLowerCase())) {
-                phoneAlertList.add(person.getPhone());
-            }
-        }
-        return phoneAlertList;
-    }
 
     public List<Firestation> findAllFirestationByStation(int station) {
         // forEach firestations of the list, if the station is the same as the station we want, add it to the list
@@ -147,7 +135,18 @@ public class FirestationService {
     }
 
 
-
-
-
+    public List<String> findPhoneAlert(int station) {
+        // retourne une liste de tous les numeros de telephone des personnes habitant dans la int station
+        List<String> phoneAlertList = new ArrayList<>();
+        List<Firestation> firestations = findAllFirestationByStation(station);
+        List<Person> persons = iPersonRepository.getAll();
+        for (Person person : persons) {
+            for (Firestation firestation : firestations) {
+                if (person.getAddress().toLowerCase().equals(firestation.getAddress().toLowerCase())) {
+                    phoneAlertList.add(person.getPhone());
+                }
+            }
+        }
+        return phoneAlertList;
+    }
 }

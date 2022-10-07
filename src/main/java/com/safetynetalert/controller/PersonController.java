@@ -3,10 +3,12 @@ package com.safetynetalert.controller;
 import com.safetynetalert.DTO.link2.ChildAlert;
 import com.safetynetalert.model.Person;
 import com.safetynetalert.service.PersonService;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.tinylog.Logger;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
@@ -83,6 +85,35 @@ public class PersonController {
             Logger.info("getChildAlert SUCCESS");
         }
         return personService.getChildAlert(address);
+    }
+    @GetMapping("/personsByAddress")
+    public List<Person> getPersonsByAddress(@RequestParam String address) {
+        if (personService.getPersonsByAddress(address).isEmpty()) {
+            Logger.error("getPersonsByAddress FAILED");
+        } else {
+            Logger.info("getPersonsByAddress SUCCESS");
+        }
+        return personService.getPersonsByAddress(address);
+    }
+    //TODO: getPhoneAlert
+   /* @GetMapping("/flood/stations")
+    public List<Object> getFlood(@RequestParam List<String> stations) {
+        if (personService.getFlood(stations).isEmpty()) {
+            Logger.error("getFlood FAILED");
+        } else {
+            Logger.info("getFlood SUCCESS");
+        }
+        return personService.getFlood(stations);
+    }*/
+    //TODO: getFire
+    @GetMapping("/fire")
+    public List<Object> getFire(@RequestParam String address) {
+        if (personService.getFire(address).isEmpty()) {
+            Logger.error("getFire FAILED");
+        } else {
+            Logger.info("getFire SUCCESS");
+        }
+        return personService.getFire(address);
     }
 }
 

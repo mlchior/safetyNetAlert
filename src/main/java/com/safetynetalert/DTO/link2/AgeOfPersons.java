@@ -1,17 +1,17 @@
 package com.safetynetalert.DTO.link2;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class AgeOfPersons {
     private String firstName;
     private String lastName;
-
-    private  String birthDate;
     private int age;
 
 
     public AgeOfPersons() {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthDate = birthDate;
+
         this.age = age;
     }
 
@@ -35,13 +35,6 @@ public class AgeOfPersons {
         return age;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
 
     public void setAge(int age) {
         this.age = age;

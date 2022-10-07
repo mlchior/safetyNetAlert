@@ -1,20 +1,12 @@
 package com.safetynetalert.DTO.link3;
 
-import java.util.List;
-
 public class PhoneAlert {
-    private List<String> phoneAlertList;
+    private String phoneNumber;
 
-    public PhoneAlert(List<String> phoneAlert) {
-        this.phoneAlertList = phoneAlert;
+
+    public PhoneAlert(String telephoneNumber) {
+        this.phoneNumber = telephoneNumber;
     }
 
-    public List<String> getPhoneAlert() {
-        return phoneAlertList;
-    }
-
-    public void setPhoneAlert(List<String> phoneAlert) {
-        this.phoneAlertList = phoneAlert;
-    }
 }
 
