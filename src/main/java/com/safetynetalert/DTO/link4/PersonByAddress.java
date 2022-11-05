@@ -1,8 +1,12 @@
 package com.safetynetalert.DTO.link4;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class PersonByAddress {
+    @JsonIgnore
+    private String firstName;
     private String lastName;
     private String phone;
     private int age;
@@ -10,17 +14,29 @@ public class PersonByAddress {
     private List<String> allergies;
 
 
-    public PersonByAddress(String lastName, String phone, int age, List<String> medications, List<String> allergies) {
+    public PersonByAddress(String firstName, String lastName, String phone, int age, List<String> medications, List<String> allergies) {
+        this.firstName = firstName;
         this.lastName = lastName;
-
         this.phone = phone;
         this.age = age;
         this.medications = medications;
         this.allergies = allergies;
     }
 
+    public PersonByAddress() {
+
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {

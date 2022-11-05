@@ -73,4 +73,6 @@ public class FirestationServiceTest {
         when(ifirestationRepository.deleteFirestation(any(String.class))).thenReturn(firestation);
         assertThat(firestationService.deleteFirestation("addressTest").toString(), containsString("addressTest"));
     }
+
+
 }

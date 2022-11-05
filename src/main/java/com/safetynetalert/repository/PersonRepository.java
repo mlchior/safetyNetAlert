@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Conversions.toLowerCase;
+
+
 
 @Repository
 public class PersonRepository implements IPersonRepository{
@@ -54,6 +55,11 @@ public class PersonRepository implements IPersonRepository{
         return person;
     }
 
+
+    public List<String> getCommunityEmail(String city) {
+        return null;
+    }
+
     private Person getByFirstNameAndLastName(String firstName, String lastName) {
         for (Person person : persons) {
             if (person.getFirstName().equalsIgnoreCase(firstName) && person.getLastName().equalsIgnoreCase(lastName)) {
@@ -63,16 +69,10 @@ public class PersonRepository implements IPersonRepository{
         return null;
     }
 
-    @Override
+    /*@Override
     public List<String> getCommunityEmail(String city) {
-        List<String> communityEmail = new ArrayList<>();
-        for (Person person : persons) {
-            if (person.getCity().equalsIgnoreCase(city)) {
-                communityEmail.add(person.getEmail());
-            }
-        }
-        return communityEmail;
-    }
+
+    }**/
 
     @Override
     public Collection<Object> getPersonInfo(String firstName, String lastName) {

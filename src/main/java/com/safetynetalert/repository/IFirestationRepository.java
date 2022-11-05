@@ -8,6 +8,7 @@ import java.util.List;
 public interface IFirestationRepository {
 
 
+
     List<Firestation> getAll();
 
     Firestation addFirestation(Firestation firestation);
@@ -18,7 +19,13 @@ public interface IFirestationRepository {
 
     Firestation getFirestationByAdress(String address);
 
-    Firestation getFirestationByStation(int station);
+    List<Firestation> findAllFirestationByStation(int station);
+
+    List<Firestation> findFirestationByAdress(String address);
+
+    List<String> findAllAddressByStation(int station);
+
+    /*  List<Firestation> findAllFirestationByStation2(List<Integer> station);*/
 }
 
 

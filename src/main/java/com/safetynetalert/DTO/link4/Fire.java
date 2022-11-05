@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Fire {
     private List<PersonByAddress> personByAdress;
-    private Firestation firestation;
+    private int station;
 
     public Fire() {
     }
 
-    public Fire(List<PersonByAddress> personByAdress, Firestation firestation) {
+    public Fire(List<PersonByAddress> personByAdress, Integer station) {
         this.personByAdress = personByAdress;
-        this.firestation = firestation;
+        this.station = station;
     }
 
     public List<PersonByAddress> getPersonByAdress() {
@@ -24,11 +24,19 @@ public class Fire {
         this.personByAdress = personByAdress;
     }
 
-    public Firestation getFirestation() {
-        return firestation;
+    public int getStation() {
+        return station;
     }
 
-    public void setFirestation(Firestation firestation) {
-        this.firestation = firestation;
+    public void setStation(int station) {
+        this.station = station;
     }
-}
+
+    public void setStation(List<Firestation> firestationByAdress) {
+        for (Firestation firestation : firestationByAdress) {
+            this.station = firestation.getStation();
+        }
+     }
+    }
+
+

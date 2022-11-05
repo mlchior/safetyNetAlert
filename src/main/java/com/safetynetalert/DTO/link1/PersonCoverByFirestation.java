@@ -1,11 +1,6 @@
 package com.safetynetalert.DTO.link1;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 public class PersonCoverByFirestation {
     private String firstName;
@@ -18,7 +13,7 @@ public class PersonCoverByFirestation {
     private int age;
 
 
-    public PersonCoverByFirestation() {
+    public PersonCoverByFirestation(String firstName, String lastName, String address, String phone, String birthDate, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -26,6 +21,10 @@ public class PersonCoverByFirestation {
         this.birthDate = birthDate;
         this.age = age;
 
+    }
+
+
+    public PersonCoverByFirestation() {
     }
 
     public String getFirstName() {

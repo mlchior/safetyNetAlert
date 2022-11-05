@@ -10,6 +10,5 @@ public interface IMedicalrecordRepository {
 
     Medicalrecord updateMedicalRecord(Medicalrecord medicalrecord);
 
-
     Medicalrecord deleteMedicalRecord(String firstName, String lastName);
 }

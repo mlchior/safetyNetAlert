@@ -14,6 +14,8 @@ public class StationNumber {
         this.numberOfAdult = numberOfAdult;
         this.numberOfChild = numberOfChild;
     }
+    public StationNumber (){
+    }
 
     public List<PersonCoverByFirestation> getListPersonCoverByStation() {
         return ListPersonCoverByStation;

@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 public class FirestationController {
     @Autowired
-    private FirestationService firestationService;
+    FirestationService firestationService;
 
     @GetMapping("/firestation")
     public List<Firestation>  getAllFirestation(){
@@ -55,8 +55,18 @@ public class FirestationController {
         }
         return f;
     }
+    @GetMapping("firestationbyadress")
+    public List<Firestation> findFirestationByAdress(@RequestParam String address){
+        List<Firestation> f = firestationService.findFirestationByAdress(address);
+        if(f == null){
+            Logger.error("findFirestationByAdress FAILED");
+        }else{
+            Logger.info("findFirestationByAdress SUCCESS");
+        }
+        return f;
+    }
 /*****************************************/
-    @GetMapping("firestation/stationNumber")
+   /** @GetMapping("firestation/stationNumber")
     public List<StationNumber> findStationInfo(@RequestParam int station) {
         return firestationService.findStationInfo(station);
     }
@@ -64,10 +74,14 @@ public class FirestationController {
     public List<String>  phoneAlert (@RequestParam int station) {
         return firestationService.findPhoneAlert(station);
     }
-    @GetMapping("firestation/firestationbystation")
 
+    @GetMapping("firestation/firestationbystation")
     public List<Firestation>  firestationByStation (@RequestParam int station) {
         return firestationService.findAllFirestationByStation(station);
+    }**/
+    @GetMapping("stationList")
+    public List<String> stationList(@RequestParam int station) {
+        return firestationService.findAllAddressByStation(station);
     }
 
 

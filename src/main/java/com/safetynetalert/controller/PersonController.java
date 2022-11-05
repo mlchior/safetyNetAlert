@@ -58,34 +58,8 @@ public class PersonController {
         return personService.deletePerson(firstName, lastName);
     }
 
-    @GetMapping("/communityEmail")
-    // get all the emails by city
-    public List<String> getCommunityEmail(@RequestParam String city) {
-        if (personService.getCommunityEmail(city).isEmpty()) {
-            Logger.error("getCommunityEmail FAILED");
-        } else {
-            Logger.info("getCommunityEmail SUCCESS");
-        }
-        return personService.getCommunityEmail(city);
-    }
-    @GetMapping("/personInfo")
-    public Collection<Object> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
-        if (personService.getPersonInfo(firstName, lastName).isEmpty()) {
-            Logger.error("getPersonInfo FAILED");
-        } else {
-            Logger.info("getPersonInfo SUCCESS");
-        }
-        return personService.getPersonInfo(firstName, lastName);
-    }
-    @GetMapping("/childAlert")
-    public List<ChildAlert> getChildAlert(@RequestParam String address) {
-        if (personService.getChildAlert(address).isEmpty()) {
-            Logger.error("getChildAlert FAILED");
-        } else {
-            Logger.info("getChildAlert SUCCESS");
-        }
-        return personService.getChildAlert(address);
-    }
+
+
     @GetMapping("/personsByAddress")
     public List<Person> getPersonsByAddress(@RequestParam String address) {
         if (personService.getPersonsByAddress(address).isEmpty()) {
@@ -94,26 +68,6 @@ public class PersonController {
             Logger.info("getPersonsByAddress SUCCESS");
         }
         return personService.getPersonsByAddress(address);
-    }
-    //TODO: getPhoneAlert
-   /* @GetMapping("/flood/stations")
-    public List<Object> getFlood(@RequestParam List<String> stations) {
-        if (personService.getFlood(stations).isEmpty()) {
-            Logger.error("getFlood FAILED");
-        } else {
-            Logger.info("getFlood SUCCESS");
-        }
-        return personService.getFlood(stations);
-    }*/
-    //TODO: getFire
-    @GetMapping("/fire")
-    public List<Object> getFire(@RequestParam String address) {
-        if (personService.getFire(address).isEmpty()) {
-            Logger.error("getFire FAILED");
-        } else {
-            Logger.info("getFire SUCCESS");
-        }
-        return personService.getFire(address);
     }
 }
 

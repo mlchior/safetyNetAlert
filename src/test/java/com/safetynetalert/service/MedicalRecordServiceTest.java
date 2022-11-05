@@ -84,7 +84,6 @@ class MedicalRecordServiceTest {
     @Test
     void deleteMedicalRecord() {
         Medicalrecord medicalrecord = new Medicalrecord();
-
         List<String> Medications = new ArrayList<>();
         Medications.add("medicationTest");
         List<String> Allergies = new ArrayList<>();
@@ -97,4 +96,6 @@ class MedicalRecordServiceTest {
         when(iMedicalRecordRepository.deleteMedicalRecord(any(String.class), any(String.class))).thenReturn(medicalrecord);
         assertThat(medicalRecordService.deleteMedicalRecord("firstNameTest", "lastNameTest").toString(), containsString("firstNameTest"));
     }
+
+
 }

@@ -9,7 +9,6 @@ import com.safetynetalert.repository.IFirestationRepository;
 import com.safetynetalert.repository.IMedicalrecordRepository;
 import com.safetynetalert.repository.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.tinylog.Logger;
 
@@ -48,105 +47,16 @@ public class FirestationService {
         Logger.info("deleteFirestation SUCCESS" + address);
         return iFirestationRepository.deleteFirestation(address);
     }
-    /*----------------------------------------**/
-    public List<StationNumber> findStationInfo(int station) {
-        List<StationNumber> stationInfoList = new ArrayList<>();
-        List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
-        List<Firestation> firestationList = findAllFirestationByStation(station);
-        List<Person> persons = iPersonRepository.getAll();
-        List<Medicalrecord> Medicalrecords = iMedicalrecordRepository.getAll();
-        int numberOfAdult = 0;
-        int numberOfChild = 0;
-
-        for (Person person : persons) {
-            for(Firestation firestation : firestationList){
-                if (person.getAddress().toLowerCase().equals(firestation.getAddress().toLowerCase())) {
-                    PersonCoverByFirestation personCoverByFirestation = new PersonCoverByFirestation();
-                    personCoverByFirestation.setFirstName(person.getFirstName());
-                    personCoverByFirestation.setLastName(person.getLastName());
-                    personCoverByFirestation.setAddress(person.getAddress());
-                    personCoverByFirestation.setPhone(person.getPhone());
-                    personCoverByFirestationList.add(personCoverByFirestation);
-            }}
-
-        }
-        for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-            for (Medicalrecord medicalrecord : Medicalrecords) {
-                if (medicalrecord.getFirstName().equals(personCoverByFirestation.getFirstName()) && medicalrecord.getLastName().equals(personCoverByFirestation.getLastName())) {
-                    personCoverByFirestation.setBirthDate(medicalrecord.getBirthdate());
-                }
-            }
-        }
-        for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-           /* Date date = null;
-            Date date2 = null;
-            date2 = new Date();
-
-
-            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            try {
-               date = dateFormat.parse(personCoverByFirestation.getBirthDate());
-               date2 = dateFormat.parse(dateFormat.format(date2));
-
-
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-
-            // convertir le temps en année
-            int years = date2.getYear() - date.getYear();
-**/
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            int years = Period.between(LocalDate.parse(personCoverByFirestation.getBirthDate(), formatter), LocalDate.now()).getYears();
-            personCoverByFirestation.setAge(years);
-            System.out.println(personCoverByFirestation.getAge());
-        }
-        for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
-            if (personCoverByFirestation.getAge() >= 18) {
-                numberOfAdult++;
-            } else {
-                numberOfChild++;
-            }
-        }
-        StationNumber stationInfo = new StationNumber(personCoverByFirestationList, numberOfAdult, numberOfChild);
-        stationInfo.setNumberOfAdult(numberOfAdult);
-        stationInfo.setNumberOfChild(numberOfChild);
-        stationInfoList.add(stationInfo);
-        return stationInfoList;
-
-    }
-
-
-
-
-
     public List<Firestation> findAllFirestationByStation(int station) {
-        // forEach firestations of the list, if the station is the same as the station we want, add it to the list
-        List<Firestation> firestations = iFirestationRepository.getAll();
-        List<Firestation> firestationsByStation = new ArrayList<>();
-        for (Firestation firestation : firestations) {
-            if (firestation.getStation() == station) {
-                firestationsByStation.add(firestation);
-            }
-
-        }
-
-        return firestationsByStation;
+        Logger.info("findAllFirestationByStation SUCCESS" + station);
+        return iFirestationRepository.findAllFirestationByStation(station);
     }
-
-
-    public List<String> findPhoneAlert(int station) {
-        // retourne une liste de tous les numeros de telephone des personnes habitant dans la int station
-        List<String> phoneAlertList = new ArrayList<>();
-        List<Firestation> firestations = findAllFirestationByStation(station);
-        List<Person> persons = iPersonRepository.getAll();
-        for (Person person : persons) {
-            for (Firestation firestation : firestations) {
-                if (person.getAddress().toLowerCase().equals(firestation.getAddress().toLowerCase())) {
-                    phoneAlertList.add(person.getPhone());
-                }
-            }
-        }
-        return phoneAlertList;
+    public List<Firestation> findFirestationByAdress(String address) {
+        Logger.info("findFirestationByAdress SUCCESS" + address);
+        return iFirestationRepository.findFirestationByAdress(address);
+    }
+    public List<String> findAllAddressByStation(int station) {
+        Logger.info("findAllAddressByStation SUCCESS" + station);
+        return iFirestationRepository.findAllAddressByStation(station);
     }
 }

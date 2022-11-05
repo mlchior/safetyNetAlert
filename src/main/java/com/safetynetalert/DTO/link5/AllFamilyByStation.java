@@ -1,35 +1,32 @@
-package com.safetynetalert.DTO;
+package com.safetynetalert.DTO.link5;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
-
-public class PersonInfo {
+public class AllFamilyByStation {
     @JsonIgnore
     private String firstName;
     private String lastName;
-    private String address;
+
     private int age;
-    private String email;
+    private String phone;
     private List<String> medications;
-
-
-
     private List<String> allergies;
 
-public PersonInfo(String firstName,String lastName, String address, int age, String email, List<String>medications,List<String>allergies){
-    this.firstName=firstName;
-    this.lastName = lastName;
-    this.address = address;
-    this.age = age;
-    this.email = email;
-    this.medications = medications;
-    this.allergies = allergies;
-}
-    //CONSTRUCTOR
-    public PersonInfo() {
+    public AllFamilyByStation(String firstName, String lastName, int age, String phone, List<String> medications, List<String> allergies) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.phone = phone;
+        this.medications = medications;
+        this.allergies = allergies;
     }
+
+    public AllFamilyByStation() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -46,14 +43,6 @@ public PersonInfo(String firstName,String lastName, String address, int age, Str
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public int getAge() {
         return age;
     }
@@ -62,12 +51,12 @@ public PersonInfo(String firstName,String lastName, String address, int age, Str
         this.age = age;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<String> getMedications() {
@@ -86,5 +75,4 @@ public PersonInfo(String firstName,String lastName, String address, int age, Str
         this.allergies = allergies;
     }
 }
-
 

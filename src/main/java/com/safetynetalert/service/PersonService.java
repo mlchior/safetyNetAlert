@@ -56,8 +56,16 @@ public class PersonService {
 
 
     public List<String> getCommunityEmail(String city) {
+
         Logger.info("getCommunityEmail SUCCESS" + city);
-        return iPersonRepository.getCommunityEmail(city);
+        List<String> communityEmail = new ArrayList<>();
+        for (Person person : iPersonRepository.getAll()) {
+            if (person.getCity().equalsIgnoreCase(city)) {
+                communityEmail.add(person.getEmail());
+            }
+        }
+        return communityEmail;
+
     }
 
     public Collection<Object> getPersonInfo(String firstName, String lastName) {
@@ -70,7 +78,7 @@ public class PersonService {
         return iPersonRepository.getPersonsByAddress(address);
     }
 
-    private int calculateAge(String birthdate) {
+    public int calculateAge(String birthdate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         int years = Period.between(LocalDate.parse(birthdate, formatter), LocalDate.now()).getYears();
         return years;
@@ -83,9 +91,6 @@ public class PersonService {
         List<AgeOfPersons> adulte = new ArrayList<>();
         List<AgeOfPersons> enfant = new ArrayList<>();
         List<ChildAlert> childAlertsList = new ArrayList<>();
-        //1 recuper la liste de toute les personne qui habite a cette adresse listPersonsByAddress
-        //2 pour la liste de toute les personne trouver leur birthdate dans medicalRecord and return listPersonsByAddressWithBirthDate
-        //for listpersonsbyaddress if firstname and lastname == firstname and lastname in medicalrecord
         for (Person person : listPersonsByAddress) {
             for (Medicalrecord medicalrecord : medicalRecords) {
                 if (person.getFirstName().equals(medicalrecord.getFirstName()) && person.getLastName().equals(medicalrecord.getLastName())) {
@@ -95,10 +100,9 @@ public class PersonService {
                     ageOfPersons.setAge(calculateAge(medicalrecord.getBirthdate()));
                     ageOfPersonsList.add(ageOfPersons);
                 }
-
             }
-
         }
+
         for (AgeOfPersons ageOfPersons : ageOfPersonsList) {
             if (ageOfPersons.getAge() < 18) {
                 enfant.add(ageOfPersons);
@@ -134,6 +138,8 @@ public class PersonService {
         return listFire;
 
     }
+
+
 
 
 }
