@@ -31,6 +31,8 @@ class PersonServiceTest {
     private IPersonRepository ipersonRepository;
 
     @Autowired
+    private EndPointService endPointService;
+    @Autowired
     private PersonService personService;
 
     @Test
@@ -109,25 +111,8 @@ class PersonServiceTest {
         when(ipersonRepository.getPersonsByAddress(any(String.class))).thenReturn(personList);
         assertThat(personService.getPersonsByAddress("addressTest").toString(), containsString("firstNameTest"));
     }
-    @Test
-    void getCommunityEmail() {
-        Person person = new Person();
-        person.setFirstName("firstNameTest");
-        person.setLastName("lastNameTest");
-        person.setAddress("addressTest");
-        person.setCity("cityTest");
-        person.setZip("zipTest");
-        person.setPhone("phoneTest");
-        person.setEmail("emailTest");
-        List<Person> personList = new ArrayList<>();
-        personList.add(person);
-        List<String> emailList = new ArrayList<>();
 
-        when(ipersonRepository.getAll()).thenReturn(personList);
-        emailList = personService.getCommunityEmail("cityTest");
-        assertEquals(1, emailList.size());
-        assertEquals(emailList.get(0),"emailTest");
-    }
+
 
 
 

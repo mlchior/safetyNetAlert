@@ -1,19 +1,20 @@
 package com.safetynetalert.repository;
 import com.safetynetalert.model.Database;
 import com.safetynetalert.model.Firestation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 @Repository
 public class FirestationRepository implements IFirestationRepository{
 
    public FirestationRepository(){
         firestations = Database.getFirestations();
-
    }
+
     static List<Firestation> firestations;
     @Override
     public List<Firestation> getAll() {

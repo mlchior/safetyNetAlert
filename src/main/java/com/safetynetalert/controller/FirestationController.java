@@ -65,20 +65,6 @@ public class FirestationController {
         }
         return f;
     }
-/*****************************************/
-   /** @GetMapping("firestation/stationNumber")
-    public List<StationNumber> findStationInfo(@RequestParam int station) {
-        return firestationService.findStationInfo(station);
-    }
-    @GetMapping("firestation/phonenumberbystation")
-    public List<String>  phoneAlert (@RequestParam int station) {
-        return firestationService.findPhoneAlert(station);
-    }
-
-    @GetMapping("firestation/firestationbystation")
-    public List<Firestation>  firestationByStation (@RequestParam int station) {
-        return firestationService.findAllFirestationByStation(station);
-    }**/
     @GetMapping("stationList")
     public List<String> stationList(@RequestParam int station) {
         return firestationService.findAllAddressByStation(station);

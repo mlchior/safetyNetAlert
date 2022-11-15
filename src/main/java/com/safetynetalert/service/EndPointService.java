@@ -137,6 +137,7 @@ public class EndPointService {
     }
     //3 phoneAlert
     public List<String> findPhoneAlert(int station) {
+        Logger.info("findPhoneAlert SUCCESS" + station);
         List<String> phoneAlertList = new ArrayList<>();
         List<Firestation> firestations = iFirestationRepository.findAllFirestationByStation(station);
         List<Person> persons = iPersonRepository.getAll();
@@ -152,6 +153,7 @@ public class EndPointService {
     //4 fire
 
     public Fire getFire(String address) {
+        Logger.info("getFire SUCCESS" + address);
         //TODO: corriger le retour de la station sur le endpoint incorrect
 
         // trouver la liste de toute les personne qui habite a cette adresse
@@ -167,6 +169,7 @@ public class EndPointService {
                     personByAddress.setFirstName(person.getFirstName());
                     personByAddress.setLastName(person.getLastName());
                     personByAddress.setAge(calculateAgeService.calculateAge(medicalrecord.getBirthdate()));
+                    personByAddress.setPhone(person.getPhone());
                     personByAddress.setMedications(medicalrecord.getMedications());
                     personByAddress.setAllergies(medicalrecord.getAllergies());
                     personByAddressList.add(personByAddress);
@@ -188,6 +191,7 @@ public class EndPointService {
 
     //5 flood/stations
    public List<AllFamilyByStation> getFlood(List<Integer> stations) {
+        Logger.info("getFlood SUCCESS" + stations);
         List<AllFamilyByStation> allFamilyByStationList = null;
         List <Firestation> firestations = new ArrayList<>();
         List <String> listdemesfirestation;
@@ -220,6 +224,7 @@ public class EndPointService {
     }
     //6 personInfo
     public List<PersonInfo> getPersonInfo(String firstName, String lastName) {
+        Logger.info("getPersonInfo : " + firstName + " " + lastName);
         List<PersonInfo> personInfoList = new ArrayList<>();
         List<Person> persons = iPersonRepository.getAll();
         List<Medicalrecord> medicalRecords = iMedicalRecordRepository.getAll();
@@ -246,7 +251,6 @@ public class EndPointService {
 
     //7 communityEmail
     public List<String> getCommunityEmail(String city) {
-
         Logger.info("getCommunityEmail SUCCESS" + city);
         List<String> communityEmail = new ArrayList<>();
         for (Person person : iPersonRepository.getAll()) {

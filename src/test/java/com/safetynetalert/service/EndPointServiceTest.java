@@ -117,40 +117,40 @@ class EndPointServiceTest {
         assertTrue(phoneAlertList.get(0).equals("000000000"));
     }
 
+    /*
+       @Test
+       @Ign
+      /* public void getFire() {
+           List<PersonByAddress> personByAddressList = new ArrayList<>();
+           List<Person> persons = new ArrayList<>();
+           List<Medicalrecord> medicalrecords = new ArrayList<>();
+           Fire fire = new Fire();
 
-  /**  @Test
-    @Ignore
-    public void getFire() {
-        List<PersonByAddress> personByAddressList = new ArrayList<>();
-        List<Person> persons = new ArrayList<>();
-        List<Medicalrecord> medicalrecords = new ArrayList<>();
-        Fire fire = new Fire();
 
+           Person person = new Person("firstNameTest", "lastNameTest", "addressTest", "cityTest", "93400", "0634432234", "emailTest@gmail.com");
+           persons.add(person);
+           person = new Person("firstNameTest2", "lastNameTest2", "addressTest2", "cityTest", "93400", "0634432234", "emailTest2@gmail.com");
+           persons.add(person);
+           Medicalrecord medicalrecord = new Medicalrecord();
+           medicalrecord = new Medicalrecord("firstNameTest", "lastNameTest", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
+           medicalrecords.add(medicalrecord);
+           medicalrecord = new Medicalrecord("firstNameTest2", "lastNameTest2", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
+           medicalrecords.add(medicalrecord);
+           when(iPersonRepository.getAll()).thenReturn(persons);
+           when(iMedicalrecordRepository.getAll()).thenReturn(medicalrecords);
+           when(iFirestationRepository.findFirestationByAdress("addressTest")).thenReturn(Collections.singletonList(new Firestation("addressTest", 1)));
+           when(iFirestationRepository.findFirestationByAdress("addressTest2")).thenReturn((List<Firestation>) new Firestation("addressTest2", 2));
+           when(calculateAgeService.calculateAge("01/01/2000")).thenReturn(20);
+           when(calculateAgeService.calculateAge("01/01/2000")).thenReturn(20);
 
-        Person person = new Person("firstNameTest", "lastNameTest", "addressTest", "cityTest", "93400", "0634432234", "emailTest@gmail.com");
-        persons.add(person);
-        person = new Person("firstNameTest2", "lastNameTest2", "addressTest2", "cityTest", "93400", "0634432234", "emailTest2@gmail.com");
-        persons.add(person);
-        Medicalrecord medicalrecord = new Medicalrecord();
-        medicalrecord = new Medicalrecord("firstNameTest", "lastNameTest", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
-        medicalrecords.add(medicalrecord);
-        medicalrecord = new Medicalrecord("firstNameTest2", "lastNameTest2", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
-        medicalrecords.add(medicalrecord);
-        when(iPersonRepository.getAll()).thenReturn(persons);
-        when(iMedicalrecordRepository.getAll()).thenReturn(medicalrecords);
-        when(iFirestationRepository.findFirestationByAdress("addressTest")).thenReturn(Collections.singletonList(new Firestation("addressTest", 1)));
-        when(iFirestationRepository.findFirestationByAdress("addressTest2")).thenReturn((List<Firestation>) new Firestation("addressTest2", 2));
-        when(calculateAgeService.calculateAge("01/01/2000")).thenReturn(20);
-        when(calculateAgeService.calculateAge("01/01/2000")).thenReturn(20);
+           // personByAddressList = endPointService.getFire("addressTest");
 
-        // personByAddressList = endPointService.getFire("addressTest");
-
-        System.out.println(personByAddressList);
-        assertTrue(personByAddressList.size() == 1);
-        fire.setStation(1);
-        System.out.println(fire);
-        assertTrue(fire.getStation() == 1);
-    }*/
+           System.out.println(personByAddressList);
+           assertTrue(personByAddressList.size() == 1);
+           fire.setStation(1);
+           System.out.println(fire);
+           assertTrue(fire.getStation() == 1);
+       }*/
     @Test
     public void getFlood() {
         List<AllFamilyByStation> allFamilyByStationList = new ArrayList<>();
@@ -164,10 +164,7 @@ class EndPointServiceTest {
         firestations.add(firestation);
         listdemesfirestations.add("addressTest");
     }
-
-
-
-}
+   }
 
 
 

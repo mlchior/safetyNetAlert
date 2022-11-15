@@ -33,7 +33,7 @@ public class EnpointControler {
 
     //TODO: add all the endpoints
     //checklist: url 1 firestation
-    @GetMapping( "firestation/stationNumberz")
+    @GetMapping( "firestation/stationNumber")
     public List<StationNumber> findStationInfo(@RequestParam int station) {
         return endPointService.findStationInfo(station);
 }
@@ -44,8 +44,8 @@ public class EnpointControler {
     }
     //checklist: url 3 phoneAlert
     //TODO: corriger le endpoint les numero de telephone d'une seul station sont affiché
-    @GetMapping( "phoneAlertz")
-    public List<String> PhoneAlert(@RequestBody int station) {
+    @GetMapping( "phoneAlert")
+    public List<String> PhoneAlert(@RequestParam int station) {
         return endPointService.findPhoneAlert(station);
     }
 
@@ -55,7 +55,7 @@ public class EnpointControler {
         return endPointService.getFire(address);
     }
     //checklist: url 5 flood/stations
-    @GetMapping("flood/stationsz")
+    @GetMapping("flood/stations")
     public List<AllFamilyByStation> getFlood(@RequestParam List<Integer> stations) {
         System.out.println("stations = " + stations.get(0));
         return endPointService.getFlood(stations);
@@ -63,7 +63,7 @@ public class EnpointControler {
 
     }
     //checklist: url 6 personInfo
-    @GetMapping("personInfoz")
+    @GetMapping("personInfo")
     public List<PersonInfo> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
         return endPointService.getPersonInfo(firstName, lastName);
     }

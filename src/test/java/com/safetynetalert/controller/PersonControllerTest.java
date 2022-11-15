@@ -101,22 +101,7 @@ class PersonControllerTest {
     }
 
 
-    @Test
-    void getCommunityEmail() throws Exception {
-        Person person = new Person("John", "Doe", "22 rue la clef des champs", "puces", "93400", "0634432234", "boulou@gmail.com");
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(person.getCity());
-        when(personServiceMock.getCommunityEmail("puces")).thenReturn(Collections.singletonList(person.getEmail()));
-        mvc.perform(MockMvcRequestBuilders.get("/communityEmail?city=puces")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0]").value("boulou@gmail.com"));
 
-
-    }
 
 
 

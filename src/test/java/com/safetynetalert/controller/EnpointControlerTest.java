@@ -27,7 +27,7 @@ class EnpointControlerTest {
 
     @Test
     public void findStationInfo() throws Exception {
-            mvc.perform(get("/firestation/stationNumberz?station=1"))
+            mvc.perform(get("/firestation/stationNumber?station=1"))
                     .andExpect(status().isOk());
         }
     @Test
