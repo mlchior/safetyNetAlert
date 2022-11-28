@@ -15,6 +15,7 @@ public class FirestationRepository implements IFirestationRepository{
         firestations = Database.getFirestations();
    }
 
+
     static List<Firestation> firestations;
     @Override
     public List<Firestation> getAll() {

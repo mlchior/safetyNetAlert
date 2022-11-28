@@ -164,7 +164,8 @@
 						<phase>integration-test</phase>
 						<configuration>
 							<excludes>
-								<exclude>none</exclude>
+								<exclude>**/model/*</exclude>
+								<exclude>**/DTO/*</exclude>
 							</excludes>
 							<includes>
 								<include>**/*IT.java</include>
