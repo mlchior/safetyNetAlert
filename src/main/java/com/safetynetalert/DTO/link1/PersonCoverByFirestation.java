@@ -20,7 +20,6 @@ public class PersonCoverByFirestation {
         this.phone = phone;
         this.birthDate = birthDate;
         this.age = age;
-
     }
 
 

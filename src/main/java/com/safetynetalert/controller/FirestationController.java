@@ -15,62 +15,61 @@ public class FirestationController {
 
     @GetMapping("/firestation")
     public List<Firestation>  getAllFirestation(){
-        List<Firestation> f = firestationService.findAllFirestation();
-        if (f == null) {
+        List<Firestation> getAllFirestation = firestationService.findAllFirestation();
+        if(getAllFirestation == null) {
             Logger.error("getAllFirestation FAILED");
         }else {
             Logger.info("getAllFirestation SUCCESS");
         }
-        return f;
+        return getAllFirestation;
     }
 
     @PostMapping("/firestation")
     public Firestation addFirestation(@RequestBody Firestation firestation){
-        Firestation f = firestationService.addFirestation(firestation);
-        if(f == null){
+        Firestation addFirestation = firestationService.addFirestation(firestation);
+        if(addFirestation == null){
             Logger.error("addFirestation FAILED");
         }else{
             Logger.info("addFirestation SUCCESS");
         }
-        return f;
+        return addFirestation;
     }
     @PutMapping("/firestation")
     public Firestation updateFirestation(@RequestBody Firestation firestation){
-        Firestation f = firestationService.updateFirestation(firestation);
-        if(f == null){
+        Firestation updateFirestation = firestationService.updateFirestation(firestation);
+        if(updateFirestation == null){
             Logger.error("updateFirestation FAILED");
         }else{
             Logger.info("updateFirestation SUCCESS");
         }
-        return f;
+        return updateFirestation;
 
     }
     @DeleteMapping("/firestation")
     public Firestation deleteFirestation(@RequestParam String address){
-        Firestation f = firestationService.deleteFirestation(address);
-        if(f == null){
+        Firestation deleteFirestation = firestationService.deleteFirestation(address);
+        if(deleteFirestation == null){
             Logger.error("deleteFirestation FAILED");
         }else{
             Logger.info("deleteFirestation SUCCESS");
         }
-        return f;
+        return deleteFirestation;
     }
-    @GetMapping("firestationbyadress")
+    @GetMapping("/firestationbyadress")
     public List<Firestation> findFirestationByAdress(@RequestParam String address){
-        List<Firestation> f = firestationService.findFirestationByAdress(address);
-        if(f == null){
+        List<Firestation> deleteFirestation = firestationService.findFirestationByAdress(address);
+        if(deleteFirestation == null){
             Logger.error("findFirestationByAdress FAILED");
         }else{
             Logger.info("findFirestationByAdress SUCCESS");
         }
-        return f;
+        return deleteFirestation;
     }
     @GetMapping("stationList")
     public List<String> stationList(@RequestParam int station) {
+        Logger.info("stationList SUCCESS");
         return firestationService.findAllAddressByStation(station);
     }
-
-
 }
 
 

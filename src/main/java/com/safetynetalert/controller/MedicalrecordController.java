@@ -14,47 +14,45 @@ public class MedicalrecordController {
 
     @GetMapping("/medicalrecord")
     public List<Medicalrecord> getAllMedicalrecord(){
-        List<Medicalrecord> mr = medicalRecordService.findAllMedicalrecord();
-        if (mr == null) {
+        List<Medicalrecord> findAllMedicalrecord = medicalRecordService.findAllMedicalrecord();
+        if (findAllMedicalrecord == null) {
             Logger.error("getAllMedicalrecord FAILED");
         }else {
             Logger.info("getAllMedicalrecord SUCCESS");
         }
-        return mr;
+        return findAllMedicalrecord;
     }
 
     @PostMapping("/medicalrecord")
     public Medicalrecord addMedicalRecord(@RequestBody Medicalrecord medicalrecord){
-        Medicalrecord mr  = medicalRecordService.addMedicalRecord(medicalrecord);
+        Medicalrecord addMedicalRecord  = medicalRecordService.addMedicalRecord(medicalrecord);
 
-        if(mr == null){
+        if(addMedicalRecord == null){
             Logger.error("addMedicalRecord FAILED");
         }else{
             Logger.info("addMedicalRecord SUCCESS");
         }
-        Logger.info(medicalrecord.getBirthdate() + "hello" );
-        return mr;
+        return addMedicalRecord;
     }
     @PutMapping("/medicalrecord")
     public Medicalrecord updateMedicalRecord(@RequestBody Medicalrecord medicalrecord){
-        Medicalrecord mr = medicalRecordService.updateMedicalRecord(medicalrecord);
+        Medicalrecord updateMedicalRecord = medicalRecordService.updateMedicalRecord(medicalrecord);
 
-        if(mr == null){
+        if(updateMedicalRecord == null){
             Logger.error("updateMedicalRecord FAILED");
         }else{
             Logger.info("updateMedicalRecord SUCCESS");
         }
-        return mr;
+        return updateMedicalRecord;
     }
     @DeleteMapping("/medicalrecord")
     public Medicalrecord deleteMedicalRecord(@RequestParam String firstName, @RequestParam String lastName){
-        Medicalrecord mr = medicalRecordService.deleteMedicalRecord(firstName, lastName);
-        if(mr == null){
+        Medicalrecord deleteMedicalRecord = medicalRecordService.deleteMedicalRecord(firstName, lastName);
+        if(deleteMedicalRecord == null){
             Logger.error("deleteMedicalRecord FAILED");
         }else{
             Logger.info("deleteMedicalRecord SUCCESS");
         }
-        return mr;
+        return deleteMedicalRecord;
     }
-
 }

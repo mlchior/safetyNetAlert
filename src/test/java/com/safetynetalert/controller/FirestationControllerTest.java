@@ -99,4 +99,32 @@ class FirestationControllerTest {
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("addressTest"));
     }
+
+    @Test
+    void findFirestationByAdress() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/firestationbyadress?address=1509 Culver St")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void findFirestationByAdress2() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/firestationbyadress?adress=2")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+
+    @Test
+    void stationList() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/stationList?station=2")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void stationList2() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/stationList?station=String")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
 }

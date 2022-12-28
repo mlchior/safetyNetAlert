@@ -1,35 +1,87 @@
 package com.safetynetalert.repository;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.safetynetalert.model.Database;
 import com.safetynetalert.model.Firestation;
-import com.safetynetalert.model.Person;
-import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.StatusResultMatchersExtensionsKt.isEqualTo;
 
 
 class FirestationRepositoryTest {
+    Database database = new Database();
+    FirestationRepository firestationRepository;
 
+    @BeforeEach
+    void setUp() {
+        List<Firestation> firestations = new ArrayList<>();
+        Firestation firestation = new Firestation();
+        firestation.setAddress("address");
+        firestation.setStation(1);
+        firestations.add(firestation);
+        Database.setFirestations(firestations);
+        firestationRepository = new FirestationRepository(database);
+    }
 
+    @Test
+    public void getAll() {
+        Assertions.assertEquals(1, firestationRepository.getAll().size());
+    }
 
+    @Test
+    public void addFirestation(){
+        Assertions.assertNotNull( firestationRepository.addFirestation(new Firestation()));
+    }
+
+    @Test
+    public void updateFirestation(){
+        Firestation firestation = new Firestation();
+        firestation.setAddress("address");
+        Assertions.assertNotNull( firestationRepository.updateFirestation(firestation));
+    }
+
+    @Test
+    public void deleteFirestation(){
+        Assertions.assertNotNull( firestationRepository.deleteFirestation("address"));
+    }
+
+    @Test
+    public void getFirestationByAdress(){
+        Assertions.assertNotNull( firestationRepository.getFirestationByAdress("address"));
+    }
+
+    @Test
+    public void getFirestationByStation(){
+        Assertions.assertNotNull( firestationRepository.getFirestationByStation(1));
+    }
+
+    @Test
+    public void findFirestationByAdress(){
+        Assertions.assertNotNull( firestationRepository.findFirestationByAdress("address").get(0));
+    }
+
+    @Test
+    public void findAllAddressByStation(){
+        Assertions.assertNotNull( firestationRepository.findAllAddressByStation(1).get(0));
+    }
+
+    @Test
+    public void getStationInfo1(){
+        Assertions.assertNotNull( firestationRepository.getStationInfo(1).get(0));
+    }
+
+    @Test
+    //DisplayName("test getStationInfo when station is diffrent form firestation station value")
+    public void getStationInfo2(){
+        Assertions.assertNull( firestationRepository.getStationInfo(2));
+    }
+
+    @Test
+    public void findAllFirestationByStation(){
+        Assertions.assertNotNull( firestationRepository.findAllFirestationByStation(1).get(0));
+    }
 
 }

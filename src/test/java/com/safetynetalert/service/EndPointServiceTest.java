@@ -1,9 +1,9 @@
 package com.safetynetalert.service;
 
+import com.safetynetalert.DTO.PersonInfo;
 import com.safetynetalert.DTO.link1.StationNumber;
 import com.safetynetalert.DTO.link2.ChildAlert;
 import com.safetynetalert.DTO.link4.Fire;
-import com.safetynetalert.DTO.link4.PersonByAddress;
 import com.safetynetalert.DTO.link5.AllFamilyByStation;
 import com.safetynetalert.model.Firestation;
 import com.safetynetalert.model.Medicalrecord;
@@ -11,9 +11,8 @@ import com.safetynetalert.model.Person;
 import com.safetynetalert.repository.IFirestationRepository;
 import com.safetynetalert.repository.IMedicalrecordRepository;
 import com.safetynetalert.repository.IPersonRepository;
-import org.apache.tomcat.jni.Address;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,13 +20,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -117,9 +113,151 @@ class EndPointServiceTest {
         assertTrue(phoneAlertList.get(0).equals("000000000"));
     }
 
+    @Test
+    @DisplayName(" getFire when personLastName is equal to medicalRecordLastName")
+    public void getFire() {
+        String address = "address";
 
+        List<Person> persons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setFirstName("jean");
+        person.setLastName("michel");
+
+        persons.add(person);
+
+        List<Medicalrecord> medicalRecords = new ArrayList<>();
+        Medicalrecord medicalrecord = new Medicalrecord();
+        medicalrecord.setFirstName("jean");
+        medicalrecord.setLastName("michel");
+        medicalrecord.setBirthdate("1995");
+
+        medicalRecords.add(medicalrecord);
+
+
+        when(iPersonRepository.getPersonsByAddress(address)).thenReturn(persons);
+        when(iMedicalrecordRepository.getAll()).thenReturn(medicalRecords);
+        when(calculateAgeService.calculateAge(medicalrecord.getBirthdate())).thenReturn(1995);
+
+        Fire fire = endPointService.getFire(address);
+        assertNotNull(fire);
+        Assertions.assertEquals(1, fire.getPersonByAdress().size());
 
     }
+
+
+    @Test
+    @DisplayName(" getFire when personLastName is not equal to medicalRecordLastName")
+    public void getFire1() {
+        String address = "address";
+
+        List<Person> persons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setFirstName("jean");
+        person.setLastName("michel");
+
+        persons.add(person);
+
+        List<Medicalrecord> medicalRecords = new ArrayList<>();
+        Medicalrecord medicalrecord = new Medicalrecord();
+        medicalrecord.setFirstName("sara");
+        medicalrecord.setLastName("hanon");
+        medicalrecord.setBirthdate("1995");
+
+        medicalRecords.add(medicalrecord);
+
+
+        when(iPersonRepository.getPersonsByAddress(address)).thenReturn(persons);
+        when(iMedicalrecordRepository.getAll()).thenReturn(medicalRecords);
+        when(calculateAgeService.calculateAge(medicalrecord.getBirthdate())).thenReturn(1995);
+
+        Fire fire = endPointService.getFire(address);
+        assertNull(fire);
+    }
+
+    @Test
+    public void getFlood() {
+
+        List<Integer> stations = new ArrayList<>();
+        List<String> stringList = new ArrayList<>();
+
+        stations.add(2);
+        stringList.add("addresstwo");
+
+        List<Person> persons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setFirstName("jean");
+        person.setLastName("michel");
+
+        persons.add(person);
+
+        List<Medicalrecord> medicalRecords = new ArrayList<>();
+        Medicalrecord medicalrecord = new Medicalrecord();
+        medicalrecord.setFirstName("jean");
+        medicalrecord.setLastName("michel");
+        medicalrecord.setBirthdate("1995");
+
+        medicalRecords.add(medicalrecord);
+
+        when(iFirestationRepository.findAllAddressByStation(2)).thenReturn(stringList);
+        when(iPersonRepository.getPersonsByAddress("addresstwo")).thenReturn(persons);
+        when(iMedicalrecordRepository.getAll()).thenReturn(medicalRecords);
+        when(calculateAgeService.calculateAge(medicalrecord.getBirthdate())).thenReturn(1995);
+
+        List<AllFamilyByStation> allFamilyByStations=  endPointService.getFlood(stations);
+
+        assertEquals(1, allFamilyByStations.size());
+        assertNotNull(allFamilyByStations.get(0));
+    }
+
+    @Test
+    public void getPersonInfo() {
+        List<Person> persons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setFirstName("jean");
+        person.setLastName("michel");
+
+        persons.add(person);
+
+        List<Medicalrecord> medicalRecords = new ArrayList<>();
+        Medicalrecord medicalrecord = new Medicalrecord();
+        medicalrecord.setFirstName("jean");
+        medicalrecord.setLastName("michel");
+        medicalrecord.setBirthdate("1995");
+
+        medicalRecords.add(medicalrecord);
+
+        when(iPersonRepository.getAll()).thenReturn(persons);
+        when(iMedicalrecordRepository.getAll()).thenReturn(medicalRecords);
+        when(calculateAgeService.calculateAge(medicalrecord.getBirthdate())).thenReturn(1995);
+
+        List<PersonInfo>  personInfos= endPointService.getPersonInfo("jean", "michel");
+
+        assertEquals(1,personInfos.size());
+        assertNotNull(personInfos.get(0));
+
+    }
+
+    @Test
+    public void getCommunityEmail() {
+        List<Person> persons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setCity("city");
+        person.setEmail("email");
+
+        persons.add(person);
+
+        when(iPersonRepository.getAll()).thenReturn(persons);
+
+        List<String> stringList= endPointService.getCommunityEmail("city");
+        assertEquals("email", stringList.get(0));
+    }
+
+}
 
 
 

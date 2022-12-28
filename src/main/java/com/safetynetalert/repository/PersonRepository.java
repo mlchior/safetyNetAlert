@@ -3,10 +3,8 @@ package com.safetynetalert.repository;
 import com.safetynetalert.model.Person;
 import org.springframework.stereotype.Repository;
 import com.safetynetalert.model.Database;
-import org.tinylog.Logger;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -14,12 +12,13 @@ import java.util.List;
 
 @Repository
 public class PersonRepository implements IPersonRepository{
+    static List<Person> persons;
 
-    public PersonRepository() {
-        persons = Database.getPersons();
-        Logger.info("Hello from PersonRepository");
+    public PersonRepository(Database database){
+        persons = database.getPersons();
     }
-    List<Person> persons;
+
+
     @Override
     public List<Person> getAll() {
         return persons;
@@ -54,32 +53,8 @@ public class PersonRepository implements IPersonRepository{
         }
         return person;
     }
-
-
-    public List<String> getCommunityEmail(String city) {
-        return null;
-    }
-
-    private Person getByFirstNameAndLastName(String firstName, String lastName) {
-        for (Person person : persons) {
-            if (person.getFirstName().equalsIgnoreCase(firstName) && person.getLastName().equalsIgnoreCase(lastName)) {
-                return person;
-            }
-        }
-        return null;
-    }
-
-    /*@Override
-    public List<String> getCommunityEmail(String city) {
-
-    }**/
-
     @Override
-    public Collection<Object> getPersonInfo(String firstName, String lastName) {
-        return null;
-    }
-
-    public Person findMedicalrecord(String firstName, String lastName){
+    public Person getByFirstNameAndLastName(String firstName, String lastName) {
         for (Person person : persons) {
             if (person.getFirstName().equalsIgnoreCase(firstName) && person.getLastName().equalsIgnoreCase(lastName)) {
                 return person;
@@ -87,6 +62,7 @@ public class PersonRepository implements IPersonRepository{
         }
         return null;
     }
+
 
     @Override
     public List<Person> getPersonsByAddress(String address) {

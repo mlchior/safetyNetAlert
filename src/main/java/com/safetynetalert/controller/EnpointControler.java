@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,29 +36,33 @@ public class EnpointControler {
     //checklist: url 1 firestation
     @GetMapping( "firestation/stationNumber")
     public List<StationNumber> findStationInfo(@RequestParam int station) {
+        Logger.info("findStationInfo");
         return endPointService.findStationInfo(station);
 }
     //checklist: url 2 childAlert
     @GetMapping( "childAlert")
     public List<ChildAlert> getChildAlert(@RequestParam String address) {
+        Logger.info("getChildAlert");
         return endPointService.getChildAlert(address);
     }
     //checklist: url 3 phoneAlert
     //TODO: corriger le endpoint les numero de telephone d'une seul station sont affiché
     @GetMapping( "phoneAlert")
     public List<String> PhoneAlert(@RequestParam int station) {
+        Logger.info("PhoneAlert");
         return endPointService.findPhoneAlert(station);
     }
 
     //checklist: url 4 fire
     @GetMapping("fire")
     public Fire getFire(@RequestParam String address) {
+        Logger.info("getFire");
         return endPointService.getFire(address);
     }
     //checklist: url 5 flood/stations
     @GetMapping("flood/stations")
     public List<AllFamilyByStation> getFlood(@RequestParam List<Integer> stations) {
-        System.out.println("stations = " + stations.get(0));
+        Logger.info("getFlood");
         return endPointService.getFlood(stations);
 
 
@@ -65,13 +70,15 @@ public class EnpointControler {
     //checklist: url 6 personInfo
     @GetMapping("personInfo")
     public List<PersonInfo> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
+        Logger.info("getPersonInfo");
         return endPointService.getPersonInfo(firstName, lastName);
     }
 
 
     //checklist: url 7 communityEmail
+    @GetMapping("communityEmail")
     public List<String> getCommunityEmail(@RequestParam String city) {
+        Logger.info("getCommunityEmail");
         return endPointService.getCommunityEmail(city);
     }
-
 }

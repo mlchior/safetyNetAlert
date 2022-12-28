@@ -16,7 +16,7 @@ public interface IPersonRepository {
 
     Person deletePerson(String firstName, String lastName);
 
-    Collection<Object> getPersonInfo(String firstName, String lastName);
+    Person getByFirstNameAndLastName(String firstName, String lastName);
 
     List<Person> getPersonsByAddress(String address);
 

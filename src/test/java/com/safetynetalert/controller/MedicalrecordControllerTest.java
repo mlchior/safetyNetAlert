@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalert.model.Database;
 import com.safetynetalert.model.Medicalrecord;
+import com.safetynetalert.service.MedicalRecordService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -34,19 +35,18 @@ class MedicalrecordControllerTest {
 
     @MockBean
     @Autowired
-    private MedicalrecordController medicalrecordControllerMock;
+    private MedicalRecordService medicalRecordServiceMock;
 
     @Test
     void getAllMedicalrecord() throws Exception {
         List<Medicalrecord> medicalrecord = new ArrayList<>();
         medicalrecord.add(new Medicalrecord("firstNameTest", "lastNameTest", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"})));
-        when(medicalrecordControllerMock.getAllMedicalrecord()).thenReturn(medicalrecord);
+        when( medicalRecordServiceMock.findAllMedicalrecord()).thenReturn(medicalrecord);
         mvc.perform(MockMvcRequestBuilders.get("/medicalrecord")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("firstNameTest"));
-
     }
 
     @Test
@@ -55,7 +55,7 @@ class MedicalrecordControllerTest {
         medicalrecord = new Medicalrecord("firstNameTest", "lastNameTest", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(medicalrecord);
-        when(medicalrecordControllerMock.addMedicalRecord(medicalrecord)).thenReturn(medicalrecord);
+        when(medicalRecordServiceMock.addMedicalRecord(medicalrecord)).thenReturn(medicalrecord);
         mvc.perform(MockMvcRequestBuilders.post("/medicalrecord")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
@@ -70,7 +70,7 @@ class MedicalrecordControllerTest {
         Medicalrecord medicalrecord = new Medicalrecord("firstNameTest", "lastNameTest", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(medicalrecord);
-        when(medicalrecordControllerMock.updateMedicalRecord(medicalrecord)).thenReturn(medicalrecord);
+        when( medicalRecordServiceMock.updateMedicalRecord(medicalrecord)).thenReturn(medicalrecord);
         mvc.perform(MockMvcRequestBuilders.put("/medicalrecord")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
@@ -83,7 +83,7 @@ class MedicalrecordControllerTest {
     @Test
     void deleteMedicalRecord() throws Exception {
         Medicalrecord medicalrecord = new Medicalrecord("firstNameTest", "lastNameTest", "01/01/2000", List.of(new String[]{"medicationTest"}), List.of(new String[]{"allergyTest"}));
-        when(medicalrecordControllerMock.deleteMedicalRecord(medicalrecord.getFirstName(),medicalrecord.getLastName())).thenReturn(medicalrecord);
+        when( medicalRecordServiceMock.deleteMedicalRecord(medicalrecord.getFirstName(),medicalrecord.getLastName())).thenReturn(medicalrecord);
         mvc.perform(MockMvcRequestBuilders.delete("/medicalrecord?firstName=firstNameTest&lastName=lastNameTest")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

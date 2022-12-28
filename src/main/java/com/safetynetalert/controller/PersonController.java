@@ -19,56 +19,61 @@ public class PersonController {
 
     @GetMapping("/person")
     public List<Person> getAllPerson() {
-        List<Person> p = personService.findAllPerson();
-        if (p.isEmpty()) {
+        List<Person> findAllPerson = personService.findAllPerson();
+        if (findAllPerson.isEmpty()) {
             Logger.error("getAllPerson FAILED");
         } else {
             Logger.info("getAllPerson SUCCESS");
         }
-        return personService.findAllPerson();
+        return findAllPerson;
     }
 
     @PostMapping("/person")
     public Person addPerson(@RequestBody Person person) {
-        if (personService.addPerson(person) == null) {
+        Person addPerson = personService.addPerson(person);
+        if (addPerson == null) {
             Logger.error("addPerson FAILED");
         } else {
             Logger.info("addPerson SUCCESS");
         }
-        return personService.addPerson(person);
+        return addPerson;
     }
 
     @PutMapping("/person")
     public Person updatePerson(@RequestBody Person person) {
-        if (personService.updatePerson(person) == null) {
+        Person updatePerson = personService.updatePerson(person);
+        if (updatePerson == null) {
             Logger.error("updatePerson FAILED");
         } else {
             Logger.info("updatePerson SUCCESS");
         }
-        return personService.updatePerson(person);
+        return updatePerson;
     }
 
     @DeleteMapping("/person")
     public Person deletePerson(@RequestParam String firstName, @RequestParam String lastName) {
-        if (personService.deletePerson(firstName, lastName) == null) {
+        Person deletePerson = personService.deletePerson(firstName, lastName);
+        if (deletePerson == null) {
             Logger.error("deletePerson FAILED");
         } else {
             Logger.info("deletePerson SUCCESS");
         }
-        return personService.deletePerson(firstName, lastName);
+        return deletePerson;
     }
 
 
 
     @GetMapping("/personsByAddress")
     public List<Person> getPersonsByAddress(@RequestParam String address) {
-        if (personService.getPersonsByAddress(address).isEmpty()) {
-            Logger.error("getPersonsByAddress FAILED");
+        List<Person> getpersonsByAddress = personService.getPersonsByAddress(address);
+        if (getpersonsByAddress == null) {
+            Logger.error("getPersonsBchatgpyAddress FAILED");
         } else {
             Logger.info("getPersonsByAddress SUCCESS");
         }
-        return personService.getPersonsByAddress(address);
+        return getpersonsByAddress;
     }
+
 }
 
 

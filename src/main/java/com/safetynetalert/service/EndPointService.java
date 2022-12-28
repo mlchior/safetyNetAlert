@@ -36,17 +36,7 @@ public class EndPointService {
     @Autowired
     CalculateAgeService calculateAgeService;
 
-
-   //TODO: changer les appel du repository au service.
-
-
-
-    //Cette url doit retourner une liste des personnes couvertes par la caserne de pompiers correspondante. Donc, si le numéro de station = 1,
-    // elle doit renvoyer les habitants couverts par la station numéro 1. La liste doit inclure les informations spécifiques suivantes : prénom,
-    // nom, adresse, numéro de téléphone. De plus, elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants (tout individu âgé de 18 ans ou moins)
-    // dans la zone desservie.
     public List<StationNumber> findStationInfo(int station) {
-
         List<StationNumber> stationInfoList = new ArrayList<>();
         List<PersonCoverByFirestation> personCoverByFirestationList = new ArrayList<>();
         List<Firestation> firestationList = iFirestationRepository.findAllFirestationByStation(station);
@@ -98,6 +88,7 @@ public class EndPointService {
 
     // 2 childAlert
     public List<ChildAlert> getChildAlert(String address) {
+        Logger.info("getChildAlert SUCCESS" + address);
         List<Person> listPersonsByAddress = iPersonRepository.getPersonsByAddress(address);
         List<AgeOfPersons> ageOfPersonsList = new ArrayList<>();
         List<Medicalrecord> medicalRecords = iMedicalRecordRepository.getAll();
@@ -154,9 +145,6 @@ public class EndPointService {
 
     public Fire getFire(String address) {
         Logger.info("getFire SUCCESS" + address);
-        //TODO: corriger le retour de la station sur le endpoint incorrect
-
-        // trouver la liste de toute les personne qui habite a cette adresse
         List<PersonByAddress> personByAddressList = new ArrayList<>();
         List<Person> persons = iPersonRepository.getPersonsByAddress(address);
         List<Medicalrecord> medicalRecords = iMedicalRecordRepository.getAll();
@@ -184,8 +172,6 @@ public class EndPointService {
             fireList.add(fire);
         }
         return fire;
-
-
     }
 
 
@@ -196,7 +182,6 @@ public class EndPointService {
         List <Firestation> firestations = new ArrayList<>();
         List <String> listdemesfirestation;
         allFamilyByStationList = new ArrayList<>();
-        System.out.println(stations);
         listdemesfirestation = new ArrayList<>();
         for (int s : stations){
             listdemesfirestation.addAll(iFirestationRepository.findAllAddressByStation(s));
@@ -246,20 +231,22 @@ public class EndPointService {
             }
         }
         return personInfoList;
-
     }
 
     //7 communityEmail
     public List<String> getCommunityEmail(String city) {
         Logger.info("getCommunityEmail SUCCESS" + city);
-        List<String> communityEmail = new ArrayList<>();
-        for (Person person : iPersonRepository.getAll()) {
-            if (person.getCity().equalsIgnoreCase(city)) {
-                communityEmail.add(person.getEmail());
+        List<String> communityEmailList = new ArrayList<>();
+        List<Person> persons = iPersonRepository.getAll();
+        for (Person person : persons) {
+            if (person.getCity().toLowerCase().equals(city.toLowerCase())) {
+                communityEmailList.add(person.getEmail());
             }
         }
-        return communityEmail;
+        return communityEmailList;
     }
+
+
 
 
 

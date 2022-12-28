@@ -3,18 +3,19 @@ package com.safetynetalert.repository;
 
 import com.safetynetalert.model.Database;
 import com.safetynetalert.model.Medicalrecord;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Slf4j
 @Repository
 public class MedicalrecordRepository implements IMedicalrecordRepository {
-    public MedicalrecordRepository(){
-        medicalrecords = Database.getMedicalrecords();
-        System.out.println(" hello from MedicalRecordRepository");
 
+    static List<Medicalrecord> medicalrecords;
+    public MedicalrecordRepository(Database database){
+        medicalrecords = database.getMedicalrecords();
     }
-    List<Medicalrecord> medicalrecords;
+
     @Override
     public List<Medicalrecord> getAll() {
         return medicalrecords;

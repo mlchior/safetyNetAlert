@@ -35,24 +35,24 @@ class EnpointControlerTest {
         mvc.perform(get("/childAlert?address=1509 Culver St"))
                 .andExpect(status().isOk());
     }
-    @Ignore
+
     @Test void PhoneAlert() throws Exception {
         mvc.perform(get("/phoneAlert?station=1"))
                 .andExpect(status().isOk());
     }
-    @Ignore
+
     @Test
     public void getCommunityEmail() throws Exception {
         mvc.perform(get("/communityEmail?city=Culver"))
                 .andExpect(status().isOk());
     }
-    @Ignore
+
     @Test
     public void getPersonInfo() throws Exception {
         mvc.perform(get("/personInfo?firstName=John&lastName=Boyd"))
                 .andExpect(status().isOk());
     }
-    @Ignore
+
     @Test
     public void getFlood() throws Exception {
         mvc.perform(get("/flood/stations?stations=1"))
@@ -64,5 +64,6 @@ class EnpointControlerTest {
         mvc.perform(get("/fire?address=1509 Culver St"))
                 .andExpect(status().isOk());
     }
+
 
 }

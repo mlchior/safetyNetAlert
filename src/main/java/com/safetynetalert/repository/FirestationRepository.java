@@ -1,7 +1,9 @@
 package com.safetynetalert.repository;
+
 import com.safetynetalert.model.Database;
 import com.safetynetalert.model.Firestation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,14 +11,15 @@ import java.util.List;
 
 @Slf4j
 @Repository
-public class FirestationRepository implements IFirestationRepository{
-
-   public FirestationRepository(){
-        firestations = Database.getFirestations();
-   }
-
-
+public class FirestationRepository implements IFirestationRepository {
     static List<Firestation> firestations;
+
+    public FirestationRepository(Database database){
+        firestations = database.getFirestations();
+    }
+
+
+
     @Override
     public List<Firestation> getAll() {
         return firestations;
@@ -30,16 +33,15 @@ public class FirestationRepository implements IFirestationRepository{
 
     @Override
     public Firestation updateFirestation(Firestation firestation) {
-      for (Firestation firestationToUpdate : firestations){
-          if (firestationToUpdate.getAddress().equals(firestation.getAddress())){
-              firestationToUpdate.setAddress(firestation.getAddress());
-              firestationToUpdate.setStation(firestation.getStation());
-              return firestationToUpdate;
-          }
-      }
-      return null;
+        for (Firestation firestationToUpdate : firestations) {
+            if (firestationToUpdate.getAddress().equals(firestation.getAddress())) {
+                firestationToUpdate.setAddress(firestation.getAddress());
+                firestationToUpdate.setStation(firestation.getStation());
+                return firestationToUpdate;
+            }
+        }
+        return null;
     }
-
 
 
     @Override
@@ -63,6 +65,7 @@ public class FirestationRepository implements IFirestationRepository{
         }
         return null;
     }
+
     public Firestation getFirestationByStation(int station) {
 
         for (Firestation firestation : firestations) {
@@ -108,13 +111,14 @@ public class FirestationRepository implements IFirestationRepository{
     }
 
     /**
-    public List<Firestation> findAllFirestationByStation2(List<Integer> station) {
-        for (Firestation firestation : firestations) {
-            if (firestation.getStation().equals(station){
-                return firestations;
-            }
-        }
-    }*/
+     * public List<Firestation> findAllFirestationByStation2(List<Integer> station) {
+     * for (Firestation firestation : firestations) {
+     * if (firestation.getStation().equals(station){
+     * return firestations;
+     * }
+     * }
+     * }
+     */
 
     public List<Firestation> getStationInfo(int station) {
 
@@ -125,7 +129,6 @@ public class FirestationRepository implements IFirestationRepository{
         }
         return null;
     }
-
 
 
 }
