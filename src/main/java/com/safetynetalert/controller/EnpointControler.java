@@ -46,23 +46,22 @@ public class EnpointControler {
         return endPointService.getChildAlert(address);
     }
     //checklist: url 3 phoneAlert
-    //TODO: corriger le endpoint les numero de telephone d'une seul station sont affiché
     @GetMapping( "phoneAlert")
     public List<String> PhoneAlert(@RequestParam int station) {
-        Logger.info("PhoneAlert");
+        Logger.info("PhoneAlert" + station) ;
         return endPointService.findPhoneAlert(station);
     }
 
     //checklist: url 4 fire
     @GetMapping("fire")
     public Fire getFire(@RequestParam String address) {
-        Logger.info("getFire");
+        Logger.info("getFire" + address);
         return endPointService.getFire(address);
     }
     //checklist: url 5 flood/stations
     @GetMapping("flood/stations")
     public List<AllFamilyByStation> getFlood(@RequestParam List<Integer> stations) {
-        Logger.info("getFlood");
+        Logger.info("getFlood" + stations);
         return endPointService.getFlood(stations);
 
 
@@ -70,7 +69,7 @@ public class EnpointControler {
     //checklist: url 6 personInfo
     @GetMapping("personInfo")
     public List<PersonInfo> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
-        Logger.info("getPersonInfo");
+        Logger.info("getPersonInfo" + firstName + lastName);
         return endPointService.getPersonInfo(firstName, lastName);
     }
 
@@ -78,7 +77,7 @@ public class EnpointControler {
     //checklist: url 7 communityEmail
     @GetMapping("communityEmail")
     public List<String> getCommunityEmail(@RequestParam String city) {
-        Logger.info("getCommunityEmail");
+        Logger.info("getCommunityEmail" + city);
         return endPointService.getCommunityEmail(city);
     }
 }

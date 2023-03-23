@@ -65,6 +65,7 @@ public class FirestationServiceTest {
         assertThat(firestationService.updateFirestation(firestation).toString(), containsString("addressTest"));
     }
 
+
     @Test
     void deleteFirestation() {
         Firestation firestation = new Firestation();

@@ -25,6 +25,8 @@ class EnpointControlerTest {
 
 
 
+
+
     @Test
     public void findStationInfo() throws Exception {
             mvc.perform(get("/firestation/stationNumber?station=1"))
@@ -55,6 +57,11 @@ class EnpointControlerTest {
 
     @Test
     public void getFlood() throws Exception {
+        mvc.perform(get("/flood/stations?stations=1,2"))
+                .andExpect(status().isOk());
+    }
+    @Test
+    public void getFlood2() throws Exception {
         mvc.perform(get("/flood/stations?stations=1"))
                 .andExpect(status().isOk());
     }
@@ -64,6 +71,14 @@ class EnpointControlerTest {
         mvc.perform(get("/fire?address=1509 Culver St"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void getFireIsNull() throws Exception {
+        mvc.perform(get("/fire?address=null"))
+                .andExpect(status().isOk());
+
+    }
+
 
 
 }

@@ -256,6 +256,21 @@ class EndPointServiceTest {
         List<String> stringList= endPointService.getCommunityEmail("city");
         assertEquals("email", stringList.get(0));
     }
+    @Test
+    public void getCommunityEmailWithWrongEmail() {
+        List<Person> persons = new ArrayList<>();
+
+        Person person = new Person();
+        person.setCity("city");
+        person.setEmail("email");
+
+        persons.add(person);
+
+        when(iPersonRepository.getAll()).thenReturn(persons);
+
+        List<String> stringList= endPointService.getCommunityEmail("city");
+        assertNotEquals("email2", stringList.get(0));
+    }
 
 }
 

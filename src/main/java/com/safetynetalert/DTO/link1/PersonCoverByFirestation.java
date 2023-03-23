@@ -22,7 +22,6 @@ public class PersonCoverByFirestation {
         this.age = age;
     }
 
-
     public PersonCoverByFirestation() {
     }
 

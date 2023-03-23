@@ -17,9 +17,9 @@ public class FirestationController {
     public List<Firestation>  getAllFirestation(){
         List<Firestation> getAllFirestation = firestationService.findAllFirestation();
         if(getAllFirestation == null) {
-            Logger.error("getAllFirestation FAILED");
+            Logger.error("getAllFirestation FAILED" + getAllFirestation);
         }else {
-            Logger.info("getAllFirestation SUCCESS");
+            Logger.info("getAllFirestation SUCCESS"+ getAllFirestation);
         }
         return getAllFirestation;
     }
@@ -28,9 +28,9 @@ public class FirestationController {
     public Firestation addFirestation(@RequestBody Firestation firestation){
         Firestation addFirestation = firestationService.addFirestation(firestation);
         if(addFirestation == null){
-            Logger.error("addFirestation FAILED");
+            Logger.error("addFirestation FAILED" + firestation);
         }else{
-            Logger.info("addFirestation SUCCESS");
+            Logger.info("addFirestation SUCCESS" + firestation);
         }
         return addFirestation;
     }
@@ -38,9 +38,9 @@ public class FirestationController {
     public Firestation updateFirestation(@RequestBody Firestation firestation){
         Firestation updateFirestation = firestationService.updateFirestation(firestation);
         if(updateFirestation == null){
-            Logger.error("updateFirestation FAILED");
+            Logger.error("updateFirestation FAILED" + firestation);
         }else{
-            Logger.info("updateFirestation SUCCESS");
+            Logger.info("updateFirestation SUCCESS" + firestation);
         }
         return updateFirestation;
 
@@ -49,9 +49,9 @@ public class FirestationController {
     public Firestation deleteFirestation(@RequestParam String address){
         Firestation deleteFirestation = firestationService.deleteFirestation(address);
         if(deleteFirestation == null){
-            Logger.error("deleteFirestation FAILED");
+            Logger.error("deleteFirestation FAILED" + address);
         }else{
-            Logger.info("deleteFirestation SUCCESS");
+            Logger.info("deleteFirestation SUCCESS"+ address);
         }
         return deleteFirestation;
     }
@@ -59,15 +59,19 @@ public class FirestationController {
     public List<Firestation> findFirestationByAdress(@RequestParam String address){
         List<Firestation> deleteFirestation = firestationService.findFirestationByAdress(address);
         if(deleteFirestation == null){
-            Logger.error("findFirestationByAdress FAILED");
+            Logger.error("findFirestationByAdress FAILED" + address);
         }else{
-            Logger.info("findFirestationByAdress SUCCESS");
+            Logger.info("findFirestationByAdress SUCCESS"+ address);
         }
         return deleteFirestation;
     }
     @GetMapping("stationList")
     public List<String> stationList(@RequestParam int station) {
-        Logger.info("stationList SUCCESS");
+        List<String> stationList = firestationService.findAllAddressByStation(station);
+        if (stationList == null) {
+            Logger.error("stationList FAILED" + station);
+        } else
+        Logger.info("stationList SUCCESS" + station);
         return firestationService.findAllAddressByStation(station);
     }
 }

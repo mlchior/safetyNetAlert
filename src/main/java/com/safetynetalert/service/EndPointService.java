@@ -56,7 +56,6 @@ public class EndPointService {
                     personCoverByFirestationList.add(personCoverByFirestation);
                 }
             }
-
         }
         for (PersonCoverByFirestation personCoverByFirestation : personCoverByFirestationList) {
             for (Medicalrecord medicalrecord : Medicalrecords) {
@@ -122,6 +121,7 @@ public class EndPointService {
             childAlert.setAge(ageOfPersons.getAge());
             childAlert.setPersonWithChild(adulte);
             childAlertsList.add(childAlert);
+
         }
 
         return childAlertsList;

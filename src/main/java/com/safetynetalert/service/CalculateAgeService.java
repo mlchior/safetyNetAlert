@@ -21,6 +21,5 @@ public class CalculateAgeService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         int years = Period.between(LocalDate.parse(birthdate, formatter), LocalDate.now()).getYears();
         return years;
-
     }
 }
